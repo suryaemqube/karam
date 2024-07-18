@@ -1,0 +1,37 @@
+ul.row.filter-list-wrapper {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+
+ul.row.filter-list-wrapper li {
+    border: 1px solid black;
+    margin: 2px;
+    width:auto !important;  
+}
+
+ul.row.filter-list-wrapper li.active {
+    background-color: lightblue;
+    border-color: darkred;
+}
+
+ul.row.filter-list-wrapper li a {
+    color: black;
+    text-decoration: none !important;
+    font-weight: 700;
+}
+
+ul.row.filter-list-wrapper li a:hover {
+    text-decoration: none !important;
+}
+.filter-wrapper-done {
+    display: flex;
+}
+.attribute-filter{
+    width: 261px;
+}
+@media only screen and (max-width: 600px) {
+    .filter-wrapper-done {
+        display: block !important;
+    }
+  }

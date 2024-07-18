@@ -1,0 +1,38 @@
+<?php 
+$getchildcategory = $block->getSubCategories(51); 
+$base_url =$block->get_base_url();
+$base_url =substr($base_url, 0, -1);
+$base_url = str_replace("/pub","",$base_url);
+?>
+
+<!-- eqipment section starts -->
+    <section class="eqp-list-wrapp">
+      <div class="container">
+        <h2 class="sec-title">Coffee <span class="txt-med">Equipment</span></h2>
+        <ul class="eqp-list d-flex">
+            <?php 
+            if(!empty($getchildcategory) || $getchildcategory!=''){
+              foreach ($getchildcategory as $subcat) {
+                 $imageUrl=$block->Categoryimage($subcat->getID());
+                 $attr_title=$block->Hovertext($subcat->getID()); 
+                
+                ?>
+
+                <li>
+                  <a href="<?php echo $subcat->getUrl();?>" title="<?php echo $attr_title; ?>">
+                    <div class="img">
+                      <img src="<?php echo $base_url.$imageUrl;?>" alt="<?php echo $subcat->getName(); ?>">
+                    </div>
+                    <h3><?php echo $subcat->getName(); ?></h3>
+                    <span class="buy-link">Buy Online</span>
+                  </a>
+                </li>
+
+            <?php 
+              }
+            }
+           ?>
+        </ul>
+      </div>
+    </section>
+    <!-- eqipment section ends -->

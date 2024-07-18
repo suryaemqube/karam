@@ -1,0 +1,36 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
+$request = $objectManager->get('\Magento\Framework\App\Request\Http');
+$urlInterface = \Magento\Framework\App\ObjectManager::getInstance()->get('Magento\Framework\UrlInterface'); 
+$controllerName = $this->getRequest()->getControllerName();
+$actionName = $this->getRequest()->getActionName();
+$routeName = $this->getRequest()->getRouteName();
+$moduleName = $this->getRequest()->getModuleName();
+
+
+?>
+<?php if($routeName=='catalog' && $moduleName=='catalog' && $controllerName=='product' && $actionName=='view'){ ?>
+
+  <?php 
+    $currentProduct = $objectManager->get('Magento\Framework\Registry')->registry('current_product');//get current product information
+    $id= $currentProduct->getId();
+    $product ='';
+    $schema = '';
+    
+    if($id!=''){
+      $product = $objectManager->create('Magento\Catalog\Model\Product')->load($id);
+      $prodSchema = $product->getData('short_description');
+    }
+    // $schema = $currentProduct->getName();
+    if($prodSchema!=''){
+      $schema = $prodSchema;
+    }  
+  ?>
+  <?php if($prodSchema!=''){ ?>
+    <div class="product attribute overview">
+      <?php echo $schema; ?>
+    </div>
+  <?php } ?>
+<?php }else{ ?>
+  <!-- do nothing -->
+<?php } ?>

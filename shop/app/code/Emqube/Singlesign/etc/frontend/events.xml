@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="customer_register_success">
+      <observer name="customerregister" instance="Emqube\Singlesign\Observer\Singlesignin"/>
+    </event>
+
+    <event name="customer_logout">
+        <observer name="customer_logout_observer" instance="Emqube\Singlesign\Observer\Customelogout"/>
+    </event>
+    <event name="customer_account_edited">
+        <observer name="emqube_singin_edit_info" instance="Emqube\Singlesign\Observer\Customeedit" />
+    </event>
+
+</config>

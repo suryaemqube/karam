@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+     <title>Coffee Equipment</title>
+    </head>
+    <body>
+      <move element="page.main.title" destination="cat_machine_dflex"/>
+      
+
+
+  </body>
+    <referenceContainer name="content">
+        <container name="catmachinelandingwrapper" htmlTag="div" htmlClass="product-wrapper-main">
+                
+          <container name="catmachinelandingheadwrapper" htmlTag="div" htmlClass="filter-wrapper-done">
+            <container name="cat_machine_dflex" htmlTag="div" htmlClass="container d-flex">
+              
+            </container>
+            <block class="Emqube\CategoryLanding\Block\Categories" name="breadcrumbmachinefetch" template="Emqube_CategoryLanding::coffeemachines/breadcrumbs.phtml" before="cat_machine_dflex" />
+          </container>
+          <!-- <block class="Emqube\CategoryLanding\Block\Categories" name="titlemachinefetch" template="Emqube_CategoryLanding::coffeequipment_title.phtml" after="-" /> -->
+
+           <block class="Emqube\CategoryLanding\Block\Categories" name="catequipmentscategoryfetch" template="Emqube_CategoryLanding::coffeemachines/coffeemachine_categories.phtml" after="titlemachinefetch" />
+
+            <block class="Emqube\CategoryLanding\Block\Categories" name="offersblock" template="Emqube_CategoryLanding::offers.phtml" after="catequipmentscategoryfetch" />
+
+
+        </container>
+        
+    </referenceContainer>
+    <referenceContainer name="main.content">
+        <block class="Magento\Framework\View\Element\Template" name="friends-section" template="Emqube_CategoryLanding::body/friends_banner.phtml" after="catequipmentscategoryfetch" />
+
+        <block class="Magento\Framework\View\Element\Template" name="coffeetitle" template="Emqube_CategoryLanding::coffeemachines/coffee_title.phtml" after="friends-section" />
+
+        <block class="Emqube\CategoryLanding\Block\Categories" name="categoriesfetch" template="Emqube_CategoryLanding::categorieslist.phtml" after="coffeetitle" />
+
+
+        <!-- <block class="Magento\Framework\View\Element\Template" name="subscription-section" template="Emqube_CategoryLanding::body/subscription_block.phtml" after="categoriesfetch" /> -->
+
+        <!-- <block class="Magento\Framework\View\Element\Template" name="blog-section" template="Emqube_CategoryLanding::body/blog_section.phtml" after="subscription-section" /> -->
+
+        <block class="Magento\Framework\View\Element\Template" name="pride-section" template="Emqube_CategoryLanding::body/pride_block.phtml" after="blog-section" />
+    </referenceContainer>
+    <referenceContainer name="page.bottom.container">
+            <block class="Magento\Catalog\Block\Product\View" name="custome_text_price" template="Emqube_CategoryLanding::price_notice.phtml"  after="content.aside"/>
+        </referenceContainer>   
+</page>

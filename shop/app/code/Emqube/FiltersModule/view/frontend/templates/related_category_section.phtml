@@ -1,0 +1,117 @@
+<?php 
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$currentCategory = $objectManager->get('Magento\Framework\Registry')->registry('current_category');
+$curr_id = $currentCategory->getID();
+
+$array_category=array(41,42,43,44,45,46,47,51,52,53,54,55,56);
+$array_category_coffeeequipment=array(51,52,53,54,55,56);
+$array_category_coffee=array(41,42,43,44,45,46);
+$getchildcategory=array();
+if(in_array($curr_id,$array_category_coffee)) {
+  $getchildcategory = $block->getSubCategories(51); 
+}else if(in_array($curr_id,$array_category_coffeeequipment)) {
+  $getchildcategory = $block->OfferProducts(60);
+
+}
+
+
+$base_url =$block->get_base_url();
+$base_url =substr($base_url, 0, -1);
+$base_url = str_replace("/pub","",$base_url);
+
+$priceHelper = $objectManager->create('Magento\Framework\Pricing\Helper\Data'); 
+?>
+<?php if (in_array($curr_id,$array_category)): ?>
+<?php if(in_array($curr_id,$array_category_coffee)): ?>
+<!-- eqipment section starts -->
+    <section class="eqp-list-wrapp">
+      <div class="container">
+        <h2 class="sec-title">Coffee <span class="txt-med">Equipment</span></h2>
+        <ul class="eqp-list d-flex">
+            <?php 
+            if(!empty($getchildcategory) || $getchildcategory!=''){
+              foreach ($getchildcategory as $subcat) {
+
+                 $imageUrl=$block->Categoryimage($subcat->getID());
+                 $attr_title=$block->Hovertext($subcat->getID()); 
+                ?>
+
+                <li>
+                  <a href="<?php echo $subcat->getUrl();?>" title="<?php echo $attr_title; ?>">
+                    <div class="img">
+                      <img src="<?php echo $base_url.$imageUrl;?>" alt="<?php echo $subcat->getName(); ?>">
+                    </div>
+                    <h3><?php echo $subcat->getName(); ?></h3>
+                    <span class="buy-link">Buy Online</span>
+                  </a>
+                </li>
+
+            <?php 
+              }
+            }
+           ?>
+        </ul>
+      </div>
+    </section>
+    <!-- eqipment section ends -->
+     <?php endif; ?>
+<?php if(in_array($curr_id,$array_category_coffeeequipment)): ?>
+  <div class="container d-flex">
+    <div class="page-title-wrapp">
+        <h1 class="page-title">Offers</h1>
+    </div>
+  </div> 
+
+ <div class="products wrapper grid products-grid">
+  <div class="container">
+    <ol class="products list items product-items d-flex">
+      <?php 
+            if(!empty($getchildcategory) || $getchildcategory!=''){
+              $image='';
+              foreach ($getchildcategory as $procat) {
+
+               $image=$block->ProductImage($procat->getID());
+               $savingPercent = 100 - round(($procat->getFinalPrice() / $procat->getPrice()*100));
+                ?>
+
+                <li class="item product product-item">
+                <?php if ($savingPercent > 0): ?>
+                     <div class="fast-moving">
+                        <span class="disc"><?php echo $savingPercent ?>% off</span>
+                    </div>
+                  <?php endif ?>
+                  <div class="product-item-info">
+                    <a href="" class="product photo product-item-photo" tabindex="-1">
+                      <span class="product-image-container" style="width:240px;">
+                        <span class="product-image-wrapper" style="padding-bottom: 125%;">
+                          <img src="<?php echo $image; ?>" alt="<?php echo $procat->getName(); ?>">
+                        </span>
+                      </span>
+                    </a>
+                    <div class="product details product-item-details">
+                      <strong class="product name product-item-name"><a class="product-item-link" href="<?php echo $procat->getProductUrl();?>"><?php echo $procat->getName();?></a></strong> 
+                      <strong><?php echo $priceHelper->currency($procat->getFinalPrice(), true, false); ?></strong>
+                       <div class="product-item-inner">
+                        <div class="product actions product-item-actions">
+                          <div class="actions-primary">
+                            <a href="<?php echo $procat->getProductUrl();?>" class="action tocart primary">
+                               <span>Buy Now</span>
+                              </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+            <?php 
+              }
+            }
+           ?>
+    </ol>
+  </div>
+ </div>
+    <?php endif; ?>
+ <!-- product grid ends -->
+<?php endif; ?>

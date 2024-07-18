@@ -1,0 +1,13 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$currentCategory = $objectManager->get('Magento\Framework\Registry')->registry('current_category');//
+$description = $currentCategory->getDescription();
+?>
+<?php if($description!=''): ?>
+<div class="category-description">
+	<div class="container">
+		<?php echo $description; ?>
+	</div>
+	
+</div>
+<?php endif; ?>

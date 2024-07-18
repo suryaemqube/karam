@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <head>
+        <title>Coffee</title>
+        <remove src="mage/calendar.css" />
+        <remove src="mage/translate-inline.js" />
+        <remove src="mage/translate.js" />
+        <remove src="jquery/ui-modules/accordion.js" />
+        <remove src="jquery/ui-modules/autocomplete.js" />
+        <remove src="jquery/ui-modules/datepicker.js" />
+        <remove src="jquery/ui-modules/draggable.js" />
+        <remove src="jquery/ui-modules/droppable.js" />
+        <remove src="jquery/ui-modules/effect-shake.js" />
+        <remove src="jquery/ui-modules/effect-slide.js" />
+        <remove src="jquery/ui-modules/effect-transfer.js" />
+        <remove src="jquery/ui-modules/effect-scale.js" />
+        <remove src="jquery/ui-modules/progressbar.js" />
+        <remove src="jquery/ui-modules/sortable.js" />
+        <remove src="jquery/ui-modules/timepicker.js" />
+        <remove src="jquery/ui-modules/tooltip.js" />
+        <remove src="mage/collapsible.js" />
+        <remove src="Magento_Checkout:js/sidebar.js" />
+        <remove src="mage/calendar.js" />
+
+         <remove src="js/tracking.js"/> 
+         <remove src="js/tracking.min.js"/>
+         <remove src="css/calendar.css"/>
+         <remove src="css/calendar.min.css"/>
+         <remove src="mage/calendar.css"/>
+         <remove src="mage/calendar.min.css"/>
+    
+        
+         <remove src="css/print.css"/>
+         <remove src="css/print.min.css"/>
+    </head>
+    <body>
+     <move element="page.main.title" destination="cat_coffee_dflex"  before="filtercoffeefetch"/>
+      
+
+
+  </body>
+    <referenceContainer name="main.content">
+                
+                    <!-- <block class="Magento\Framework\View\Element\Template" name="subscription-section" template="Emqube_CategoryLanding::body/subscription_block.phtml" after="quick_buy.block" /> -->
+
+                    <block class="Magento\Framework\View\Element\Template" name="friends-section" template="Emqube_CategoryLanding::body/friends_banner.phtml" after="subscription-section" />
+
+                    <!-- <block class="Magento\Framework\View\Element\Template" name="blog-section" template="Emqube_CategoryLanding::body/blog_section.phtml" after="friends-section" /> -->
+
+                    <block class="Magento\Framework\View\Element\Template" name="pride-section" template="Emqube_CategoryLanding::body/pride_block.phtml" after="blog-section" />
+            
+    </referenceContainer>
+
+    <referenceContainer name="content">
+
+        <container name="catlandingwrapper" htmlTag="div" htmlClass="product-wrapper-main">
+            <container name="catmachinelandingheadwrapper" htmlTag="div" htmlClass="filter-wrapper-done">
+            <container name="cat_coffee_dflex" htmlTag="div" htmlClass="container d-flex">
+              <block class="Emqube\CategoryLanding\Block\Categories" name="filtercoffeefetch" template="Emqube_CategoryLanding::filtercoffee.phtml" after="page.main.title" />
+            </container>
+            <block class="Emqube\CategoryLanding\Block\Categories" name="breadcrumbcoffeefetch" template="Emqube_CategoryLanding::coffee_breadcrumbs.phtml" before="cat_coffee_dflex" />
+           </container>  
+
+            
+
+            <block class="Emqube\CategoryLanding\Block\Categories" name="categoriesfetch" template="Emqube_CategoryLanding::categorieslist.phtml" after="quick_buy.block" />
+        </container>
+        
+    </referenceContainer>
+    <referenceContainer name="main.content">
+         <block class="Emqube\CategoryLanding\Block\Categories" name="catequipmentsfetch" template="Emqube_CategoryLanding::coff_equipmentssection.phtml" after="friends-section" />
+    </referenceContainer>
+
+   <!--  <referenceContainer name="page.bottom.container">
+            <block class="Magento\Catalog\Block\Product\View" name="custome_text_price" template="Emqube_CategoryLanding::price_notice.phtml"  after="content.aside"/>
+    </referenceContainer>    -->
+
+</page>

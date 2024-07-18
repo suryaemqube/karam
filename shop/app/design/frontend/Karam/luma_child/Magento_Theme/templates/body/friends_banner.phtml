@@ -1,0 +1,24 @@
+<?php 
+$currentCategory=array();
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$currentCategory = $objectManager->get('Magento\Framework\Registry')->registry('current_category');
+$curr_id='';
+if (!empty($currentCategory)) {
+ $curr_id = $currentCategory->getID();
+}
+
+$array_category_coffeeequipment=array(51,52,53,54,55,56);
+?>
+<?php if (!in_array($curr_id,$array_category_coffeeequipment) || $curr_id==''): ?>
+<!-- friends section starts -->
+
+<?php 
+
+ echo $this->getLayout()
+          ->createBlock('Magento\Cms\Block\Block')
+          ->setBlockId('friends_section')
+          ->toHtml();
+
+ ?>
+
+  <?php endif ?>

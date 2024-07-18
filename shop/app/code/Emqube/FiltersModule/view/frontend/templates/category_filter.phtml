@@ -1,0 +1,63 @@
+<?php
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$currentCategory = $objectManager->get('Magento\Framework\Registry')->registry('current_category');
+$parent_id = $currentCategory->getparent_id();
+$curr_id = $currentCategory->getID();
+$catergory_id = $currentCategory->getId();
+$category = $block->getCategory($catergory_id);
+$all_coffee_name = $currentCategory->getName();
+$cofee_url = $currentCategory->getUrl();
+
+if ($parent_id == 2) {
+    $parentCategory_id = $curr_id;
+    $main_class = "active";
+
+} else {
+
+    $main_class = "";
+    $parentCategory_id = $category->getparent_id();
+
+    $paracat = $block->getParentCategory($parentCategory_id);
+
+    $all_coffee_name = $paracat->getName();
+
+    $cofee_url = $paracat->getUrl();
+}
+$getchildcategory = $block->getChildCategory($parentCategory_id);
+
+$array_category = array(41, 42, 43, 44, 45, 46, 62, 47, 51, 52, 53, 54, 55);
+$array_category_coffeeequipment = array(47, 51, 52, 53, 54, 55);
+$array_category_coffee = array(41, 42, 43, 44, 45, 46, 62);
+?>
+<?php if (in_array($curr_id, $array_category)): ?>
+    <?php if (!empty($getchildcategory) || $getchildcategory != ''): ?>
+        <div class="row filter-wrapper range-filter">
+            <?php if (in_array($curr_id, $array_category_coffee)): ?>
+                <label for="">Range</label>
+            <?php endif; ?>
+            <?php if (in_array($curr_id, $array_category_coffeeequipment)): ?>
+                <label for="">Equipments</label>
+            <?php endif; ?>
+            <ul class="row filter-list-wrapper">
+                <li class="<?php echo $main_class; ?>"><a href="<?php echo $cofee_url; ?>">All</a></li>
+                <?php
+                if (!empty($getchildcategory) || $getchildcategory != '') {
+                    foreach ($getchildcategory as $subcat) {
+                        if ($catergory_id == $subcat->getID()) {
+                            $class = 'active';
+                        } else {
+                            $class = '';
+                        }
+                        ?>
+
+                        <li class="<?php echo $class ?>"><a href="<?php echo $subcat->getUrl(); ?>"><?php echo $subcat->getName(); ?></a>
+                        </li>
+                        <?php
+                    }
+                }
+                ?>
+            </ul>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

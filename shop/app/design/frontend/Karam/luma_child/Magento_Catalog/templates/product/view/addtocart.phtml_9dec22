@@ -1,0 +1,80 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+?>
+<?php $_product = $block->getProduct(); ?>
+<?php $subscribe_link = $_product->getData('subscription_product_link'); 
+$subscription = $_product->getData('subscription'); 
+$helper = $this->helper('Meetanshi\SubscriptionRestriction\Helper\Data');
+$customerLogin = $helper->getCustomerLogin();
+$redirectPage = $helper->getRedirectPage();
+
+// $subscribe_link = $_product->getResource()->getAttribute('your_attribute_code')->getFrontend()->getValue($_product);
+
+?>
+<?php $buttonTitle = __('Add to Cart'); ?>
+<?php if ($_product->isSaleable()) :?>
+<?php if ($block->shouldRenderQuantity()) :?>
+        <div class="field qty">
+            <label class="label" for="qty"><span><?= $block->escapeHtml(__('Qty')) ?></span></label>
+            <div class="control">
+                <input type="number"
+                       name="qty"
+                       id="qty"
+                       min="0"
+                       value="<?= $block->getProductDefaultQty() * 1 ?>"
+                       title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
+                       class="input-text qty"
+                       data-validate="<?= $block->escapeHtmlAttr(json_encode($block->getQuantityValidators())) ?>"
+                       />
+            </div>
+        </div>
+        <?php endif; ?>
+<div class="box-tocart <?php if($subscribe_link!=''){ ?> other-subscribe-btn <?php } ?>">
+    <div class="fieldset">
+        
+        <div class="actions prad">
+        <?php if (!$subscription) { ?>
+                <button type="submit"
+                    title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
+                    class="action primary tocart pradnya"
+                    id="product-addtocart-button" disabled>
+                <span><?= $block->escapeHtml($buttonTitle) ?></span>
+            </button>
+            <? } else { 
+                    if ($customerLogin) { ?>
+                       <button type="submit"
+                    title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
+                    class="action primary tocart pradn2"
+                    id="product-addtocart-button" disabled>
+                    <span><?= $block->escapeHtml($buttonTitle) ?></span>
+                    </button>
+            <? }else{ ?>
+                <a href="<?php echo $redirectPage;?>" class="action toSubscribe prad1"><?php echo __('Please login to subscribe to this product')?></a>
+            <? } 
+        }?>
+        <?php if($subscribe_link!=''){ ?>
+              <a href="<?php echo $subscribe_link; ?>" class="action toSubscribe">Subscribe</a>
+            <?php } ?>
+            <?= $block->getChildHtml('', true) ?>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<?php if (!$_product->isSaleable()) :?>
+    <div class="box-tocart">
+      <h1>Out of Stock</h1>
+    </div>
+<?php endif; ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/js/validate-product": {}
+        }
+    }
+</script>
+

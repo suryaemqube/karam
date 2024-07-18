@@ -1,0 +1,77 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Widget\Telephone $block */
+?>
+
+<div class="field telephone <?= $block->isRequired() ? 'required' : '' ?>">
+    <label for="telephone" class="label" style="display: block;">
+        <span>
+            <?= $block->escapeHtml(__('Phone Number')) ?>
+        </span>
+    </label>
+    <div class="control">
+        <?php
+            $_validationClass = $block->escapeHtmlAttr(
+                $this->helper('Magento\Customer\Helper\Address')
+                     ->getAttributeValidationClass('fax')
+            );
+        ?>
+        <input type="text"
+               name="telephone"
+               placeholder="05XXXXXXXX"
+               id="telephone"
+               value="<?= $block->escapeHtmlAttr($block->getTelephone()) ?>"
+               title="<?= $block->escapeHtmlAttr(__('Phone Number')) ?>"
+               data-validate="{required:true,'minlength':10,'validate_cutome_phone':true}" class="input-text <?= $_validationClass ?: '' ?>"
+        >
+        <span class="custome-message-telephone"></span>
+    </div>
+</div>
+<script type="text/javascript">
+ require([
+        'jquery'
+    ], function ($) {
+        $( document ).ready(function() {
+            $("#telephone").keyup(function(){
+                var phone = $("#telephone").val();
+                
+                if (phone.charAt(0)!='0') {
+                  
+                    $(".custome-message-telephone").html("Please specify a valid mobile number start with 05");
+                    $("#telephone").val('');
+                }else{
+                    if(phone.length > 1){
+                        if (phone.charAt(1)!='5') {
+                            $(".custome-message-telephone").html("Please specify a valid mobile number start with 05");
+                            $("#telephone").val(''); 
+                            $("#telephone").val('0'); 
+                        }else{
+                            $(".custome-message-telephone").html(""); 
+                        }
+                            
+                    }else{
+                        $(".custome-message-telephone").html("");
+                    }
+                     
+                }
+                
+              
+            });
+        });
+       
+    });
+
+    
+</script>
+<style type="text/css">
+  .phon_starting{
+    width: 100%;
+    display: block; 
+  }
+</style>

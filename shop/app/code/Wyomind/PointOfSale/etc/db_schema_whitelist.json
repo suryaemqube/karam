@@ -1,0 +1,79 @@
+{
+    "pointofsale": {
+        "column": {
+            "place_id": true,
+            "customer_group": true,
+            "store_id": true,
+            "position": true,
+            "store_code": true,
+            "name": true,
+            "address_line_1": true,
+            "address_line_2": true,
+            "city": true,
+            "state": true,
+            "postal_code": true,
+            "country_code": true,
+            "main_phone": true,
+            "email": true,
+            "hours": true,
+            "description": true,
+            "longitude": true,
+            "latitude": true,
+            "status": true,
+            "image": true,
+            "days_off": true,
+            "store_page_url_key": true,
+            "store_page_content": true,
+            "store_page_enabled": true,
+            "store_locator_description_use_global": true,
+            "store_locator_description": true,
+            "visible_store_locator": true,
+            "visible_product_page": true,
+            "visible_checkout": true,
+            "store_page_content_use_global": true,
+            "store_page_meta_title_use_global": true,
+            "store_page_meta_title": true,
+            "store_page_meta_keywords_use_global": true,
+            "store_page_meta_keywords": true,
+            "store_page_meta_description_use_global": true,
+            "store_page_meta_description": true,
+            "store_page_meta_robots_use_global": true,
+            "store_page_meta_robots": true,
+            "store_page_layout_update": true
+        },
+        "index": {
+            "POINTOFSALE_PLACE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "pointofsale_attributes": {
+        "column": {
+            "attribute_id": true,
+            "code": true,
+            "label": true,
+            "type": true
+        },
+        "index": {
+            "POINTOFSALE_ATTRIBUTES_ATTRIBUTE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "pointofsale_attributes_values": {
+        "column": {
+            "value_id": true,
+            "attribute_id": true,
+            "pointofsale_id": true,
+            "value": true
+        },
+        "index": {
+            "POINTOFSALE_ATTRIBUTES_VALUES_VALUE_ID": true
+        },
+        "constraint": {
+            "POINTOFSALE_ATTRIBUTES_VALUES_POINTOFSALE_ID_ATTRIBUTE_ID": true
+        }
+    }
+}

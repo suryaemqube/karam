@@ -1,0 +1,50 @@
+<?php
+/** @var \Mirasvit\RewardsCustomerAccount\Block\Account\Listing $block */
+$collection = $block->getTransactionCollection();
+$earnRules  = $block->getDisplayEarnRules();
+$spendRules = $block->getDisplaySpendRules();
+$points     = $this->helper('Mirasvit\Rewards\Helper\Data')->formatPointsToCurrency($block->getBalancePoints());
+$logoHtml   = $this->helper('Mirasvit\Rewards\Helper\Data')->getLogoHtml();
+$pointUnit  = $this->helper('Mirasvit\Rewards\Helper\Data')->getPointsName();
+?>
+<div class="block block-rewards-account-summary order-details-items">
+    <div class="block-title" style="display:none;">
+        <?= $block->getChildHtml('rewards.page.main.title') ?>
+        <strong><?= __('Points Summary') ?></strong>
+    </div>
+
+    <div class="block-content">
+        <div class="mst-rewards-account-amount-wrapper">
+            <div>
+                <div class="mst-rewards-account-subtitle"><?= __('Current Balance') ?></div>
+
+                <div class="mst-rewards-account-amount">
+                    <div class="points"><?= $points ?></div>
+                    <div class="unit"><?= $pointUnit ?></div>
+                </div>
+            </div>
+
+            <?= $logoHtml ?>
+        </div>
+
+        <p><?= $block->getChildHtml('rewards.notification') ?></p>
+    </div>
+
+    <?php if ($earnRules->count()): ?>
+        <div class="block-title earn subtitle">
+            <strong><?= __('How to earn points') ?></strong>
+        </div>
+        <div class="block-content reward-calculate-wrapper">
+
+          <?php 
+
+           echo $this->getLayout()
+          ->createBlock('Magento\Cms\Block\Block')
+          ->setBlockId('earn_points_block')
+          ->toHtml();
+           ?>
+            
+        </div>
+    <?php endif; ?>
+</div>
+

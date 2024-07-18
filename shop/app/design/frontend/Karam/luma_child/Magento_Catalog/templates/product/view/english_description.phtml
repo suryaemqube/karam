@@ -1,0 +1,49 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$currentProduct = $objectManager->get('Magento\Framework\Registry')->registry('current_product');
+$categories=array();
+$categories = $currentProduct->getCategoryIds();
+$coffee_desc_class='';
+$check_array_cat=array();
+if(!empty($categories)){
+  foreach($categories as $category){
+    $cat = $objectManager->create('Magento\Catalog\Model\Category')->load($category);
+    $cat->getID();
+    array_push($check_array_cat,$cat->getID());
+  }
+}
+if(!empty($check_array_cat)){
+  if(in_array("41", $check_array_cat)){
+    $coffee_desc_class='coffee-description';
+  }
+  if(in_array("51", $check_array_cat)){
+    $coffee_desc_class='coffee-equip-description';
+  }
+}
+//get current product information
+$id= $currentProduct->getId();
+$english_description='';
+$short_description='';
+$tell_me_more='';
+if($id!=''){
+    $product = $objectManager->create('Magento\Catalog\Model\Product')->load($id);
+    $english_description = $product->getDescription();
+    $short_description = $product->getShortDescription();
+    $tell_me_more = $product->getData('tell_me_more');
+
+}
+
+
+?>
+<div class="product-info-main eng <?php echo $coffee_desc_class;?>">
+<div class="content">
+   <div class="content">
+          <div class="desc">
+            <!-- <span class="title"><strong>English Content: </strong></span> -->
+            <p><?php echo $english_description ?></p>
+          </div>
+          
+          
+        </div>
+</div>
+</div>

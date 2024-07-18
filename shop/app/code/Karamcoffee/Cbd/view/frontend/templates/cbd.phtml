@@ -1,0 +1,25 @@
+<div class="spinner_load_div">
+<div class="lds-facebook"><div></div><div></div><div></div></div>
+<div class="redirecting_text">Please wait while you are redirected to the gateway</div>
+</div>
+<?php 
+$cdb_url = "https://www.cbdonline.ae/cybersource/Payment/InitiateCreditCardPayment/";
+
+//if($_SERVER['REMOTE_ADDR'] == '103.93.136.56'){
+	// $cdb_url = "https://test.cbdonline.ae/Cybersource/Payment/InitiateCreditCardPayment";
+//}
+?>
+
+<form id="payment_page" name='redirect' action='<?php echo $cdb_url;?>' method='POST'>
+<!--form id="payment_page" name='redirect' action='https://www.cbdonline.ae/cybersource/Payment/InitiateCreditCardPayment/' method='POST'-->
+	<input type='hidden' name='c' value='<?php echo $this->chars(); ?>'>
+	<input style="display: none;" type='submit' value='Click Here To Pay'>
+</form>
+<script type="text/javascript">
+require(['jquery', 'jquery/ui'], function($){
+	$(document).ready(function(){
+     	$("#payment_page").submit();
+	});
+});
+</script>
+

@@ -1,0 +1,18 @@
+<p class="step-title amcheckout-title" data-role="title"
+   role="tab" aria-selected="false" aria-expanded="true" tabindex="0" style="display: block;">
+    <?php echo $block->getTitle(); ?>
+</p>
+<div id="checkout-step-pas" class="pas-use step-content" data-role="content">
+    <div class="control">
+        <input style='display: inline-block !important;width: auto !important;height: auto !important;position: unset;' type='radio' id="pas-yes" <?php if ($block->getStorePickupActivatedDefault() === "1") {
+            echo 'checked="checked"';
+} ?> onclick="PickupAtStore.showPickupAtStore(true);PickupAtStore.updateShippingMethod()" name='pickupatstore' value='1'/>
+        <span><?php echo __("Yes"); ?></span>
+    </div>
+    <div class="control">
+        <input style='display: inline-block !important;width: auto !important;height: auto !important;position: unset;' type='radio' id="pas-no" <?php if ($block->getStorePickupActivatedDefault() !== "1") {
+            echo 'checked="checked"';
+} ?> onclick="PickupAtStore.showPickupAtStore(false);jQuery(jQuery('[name^=ko_unique_]')[0]).trigger('click');"  name='pickupatstore' value='0'/>
+        <span><?php echo __("No"); ?></span>
+    </div>
+</div>

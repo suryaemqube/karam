@@ -1,0 +1,35 @@
+<?php
+/** @var \Mirasvit\RewardsCustomerAccount\Block\Account\ExpiringPoints $block */
+
+$points = $block->getExpiringPointsAmount();
+$days   = $this->getExpiringPointsDays();
+
+if ($points == 0) {
+    return;
+}
+?>
+<div class="mst__expiring-points message info empty">
+    <span>
+        <?php if ($days > 1): ?>
+            <?= __(
+                'Only <b>%3 days</b> left until your <b>%1 %2</b> expire!',
+                $points,
+                $this->getPointsName(),
+                $days
+            ) ?>
+        <?php elseif ($days == 1): ?>
+            <?= __(
+                'Tomorrow, your <b>%1 %2</b> will expire!',
+                $points,
+                $this->getPointsName()
+            ) ?>
+        <?php elseif ($days == 0): ?>
+            <?= __(
+                '<b>%1 %2</b> expire today!',
+                $points,
+                $this->getPointsName()
+            ) ?>
+        <?php endif ?>
+    </span>
+</div>
+

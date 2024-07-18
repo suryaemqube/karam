@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <head>
+        <title>Coffee</title>
+        <remove src="mage/calendar.css" />
+        <remove src="mage/translate-inline.js" />
+        <remove src="mage/translate.js" />
+        <remove src="jquery/ui-modules/accordion.js" />
+        <remove src="jquery/ui-modules/autocomplete.js" />
+        <remove src="jquery/ui-modules/datepicker.js" />
+        <remove src="jquery/ui-modules/draggable.js" />
+        <remove src="jquery/ui-modules/droppable.js" />
+        <remove src="jquery/ui-modules/effect-shake.js" />
+        <remove src="jquery/ui-modules/effect-slide.js" />
+        <remove src="jquery/ui-modules/effect-transfer.js" />
+        <remove src="jquery/ui-modules/effect-scale.js" />
+        <remove src="jquery/ui-modules/progressbar.js" />
+        <remove src="jquery/ui-modules/sortable.js" />
+        <remove src="jquery/ui-modules/timepicker.js" />
+        <remove src="jquery/ui-modules/tooltip.js" />
+        <remove src="mage/collapsible.js" />
+        <remove src="Magento_Checkout:js/sidebar.js" />
+        <remove src="mage/calendar.js" />
+
+         <remove src="js/tracking.js"/> 
+         <remove src="js/tracking.min.js"/>
+         <remove src="css/calendar.css"/>
+         <remove src="css/calendar.min.css"/>
+         <remove src="mage/calendar.css"/>
+         <remove src="mage/calendar.min.css"/>
+    
+        
+         <remove src="css/print.css"/>
+         <remove src="css/print.min.css"/>
+    </head>
+    <body>
+    
+      
+
+
+  </body>
+    <referenceContainer name="main.content">
+                
+                    <block class="Magento\Framework\View\Element\Template" name="subscription-section_new" template="Magento_Theme::body/subscription_block.phtml" after="quick_buy.block" />
+
+                    <block class="Magento\Framework\View\Element\Template" name="friends-section_new" template="Magento_Theme::body/friends_banner.phtml" after="subscription-section_new" />
+
+                    <block class="Magento\Framework\View\Element\Template" name="blog-section_new" template="Magento_Theme::body/blog_section.phtml" after="friends-section_new" />
+
+                    <block class="Magento\Framework\View\Element\Template" name="pride-section_new" template="Magento_Theme::body/pride_block.phtml" after="blog-section_new" />
+            
+    </referenceContainer>
+
+    
+
+</page>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+
+    <!-- PLUGIN -->
+    <type name="Magento\Multishipping\Block\Checkout\Addresses">
+        <plugin name="wyomind_pickupatstore_plugin_multishipping_block_checkout_addresses"
+                type="Wyomind\PickupAtStore\Plugin\Multishipping\Block\Checkout\Addresses" />
+    </type>
+
+    <preference for="Magento\Multishipping\Model\Checkout\Type\Multishipping"
+                type="Wyomind\PickupAtStore\Magento\Multishipping\Model\Checkout\Type\Multishipping"/>
+
+
+</config>

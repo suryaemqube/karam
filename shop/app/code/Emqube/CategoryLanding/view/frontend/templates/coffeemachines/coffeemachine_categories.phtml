@@ -1,0 +1,85 @@
+<?php 
+$getchildcategory = $block->getSubCategories(51); 
+$base_url =$block->get_base_url();
+$base_url =substr($base_url, 0, -1);
+$base_url = str_replace("/pub","",$base_url);
+?>
+<div class="products wrapper grid products-grid">
+    <div class="container">
+      <ol class="products list items product-items d-flex owl-carousel">
+      	<?php 
+            if(!empty($getchildcategory) || $getchildcategory!=''){
+              foreach ($getchildcategory as $subcat) {
+
+                 $imageUrl=$block->Categoryimage($subcat->getID());
+                ?>
+
+                <li class="item product product-item">
+
+                  <div class="product-item-info" data-container="product-grid">
+                    <a href="<?php echo $subcat->getUrl();?>" class="product photo product-item-photo" tabindex="-1">
+                      <span class="product-image-container" style="width:240px;">
+                        <span class="product-image-wrapper" style="padding-bottom: 125%;">
+                          <img src="<?php echo $base_url.$imageUrl; ?>" alt="<?php echo $subcat->getName(); ?>">
+                        </span>
+                      </span>
+                    </a>
+                    <div class="product details product-item-details">
+                      <strong class="product name product-item-name"><a class="product-item-link" href="<?php echo $subcat->getUrl();?>"><?php echo $subcat->getName();?></a></strong> 
+                       <div class="product-item-inner">
+                        <div class="product actions product-item-actions">
+                          <div class="actions-primary">
+    	                      <a href="<?php echo $subcat->getUrl();?>" class="action tocart primary">
+    	                         <span>Buy Now</span>
+                              </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+            <?php 
+              }
+            }
+           ?>
+      	
+        
+        
+      </ol>
+    </div>
+  </div>
+<script type="text/javascript">
+  
+  require([
+        'jquery',
+        'OwlCarousel'
+    ], function($,owl){
+        $(document).ready(function() {
+          console.log('Owl');
+           $.noConflict();
+            //if ( $('.main-product-grid.products.list li').length > 1 ) {
+              $('.owl-carousel').owlCarousel({
+                loop:true,
+                margin:10,
+                responsiveClass:true,
+                responsive:{
+                    0:{
+                        items:2,
+                        nav:true
+                    },
+                    768:{
+                        items:3,
+                        nav:true
+                    },
+                    1200:{
+                        items:5,
+                        nav:true,
+                        loop:false
+                    }
+                }
+              });
+            //}
+        });
+    });
+</script>

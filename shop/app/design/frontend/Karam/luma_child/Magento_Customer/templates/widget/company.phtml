@@ -1,0 +1,56 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Widget\Company $block */
+?>
+<div class="field company <?= $block->isRequired() ? 'required' : '' ?>">
+    <label for="company" class="label">
+        <span>
+            <?= $block->escapeHtml(__('Location Type')) ?>
+        </span>
+    </label>
+    <div class="control">
+        <?php
+            $_validationClass = $block->escapeHtmlAttr(
+                $this->helper('Magento\Customer\Helper\Address')
+                     ->getAttributeValidationClass('company')
+            );
+        ?>
+        <!-- <input type="text"
+               name="company"
+               id="company"
+               value="<?= $block->escapeHtmlAttr($block->getCompany()) ?>"
+               title="<?= $block->escapeHtmlAttr(__('Location Type')) ?>"
+               class="input-text <?= $_validationClass ?: '' ?>"
+         > -->
+         <select
+               name="company"
+               id="company"
+               class="required-entry"
+               title="<?= $block->escapeHtmlAttr(__('Location Type')) ?>"
+               data-validate="{'validate-select':true}"
+               aria-required="true">
+               <option value="Home" <?= $block->escapeHtmlAttr($block->getCompany()) == 'Home' ? 'selected="selected"' : '' ?>>Home</option>
+               <option value="Work" <?= $block->escapeHtmlAttr($block->getCompany()) == 'Work' ? 'selected="selected"' : '' ?>>Work</option>
+          </select>
+    </div>
+</div>
+
+<!-- <script>
+
+  var interval = setInterval(function(){
+      var postaCode = document.getElementsByName('postcode');
+      postaCode[0].addEventListener("keypress", function(event){
+      	var value = event.target.value;
+        if(value.length == 5){
+          postaCode[0].value = value+" ";
+        }
+        clearInterval(interval);
+      });
+  }, 1000);
+</script> -->

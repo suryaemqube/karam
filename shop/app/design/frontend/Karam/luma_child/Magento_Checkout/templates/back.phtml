@@ -1,0 +1,10 @@
+<?php
+$base_url='';
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$request = $objectManager->get('Magento\Framework\App\Action\Context')->getRequest();
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$base_url= $storeManager->getStore()->getBaseUrl();
+?>
+<?php if($request->getFullActionName()=='checkout_index_index'):?>
+      <a class="back-cart" href="<?php echo $base_url."checkout/cart/"?>">Back</a>
+<?php endif;?>

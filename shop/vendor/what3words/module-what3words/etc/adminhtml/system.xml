@@ -1,0 +1,129 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="what3words" translate="label" sortOrder="120">
+            <label>what3words address</label>
+        </tab>
+        <section id="what3words" translate="label" type="text" sortOrder="100" showInDefault="1" showInStore="1" showInWebsite="1">
+            <label>what3words address</label>
+            <tab>what3words</tab>
+            <resource>What3Words_What3Words::what3words</resource>
+            <group id="general" translate="label" type="text" sortOrder="0" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>General</label>
+                <field id="enabled" translate="label" type="select" sortOrder="0" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>Enabled?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="api_key" translate="label" type="password" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>API Key</label>
+                </field>
+                <field id="save_coordinates" translate="label" type="select" sortOrder="20" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>Save coordinates</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="save_nearest" translate="label" type="select" sortOrder="30" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>Save nearest place</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="clipping" translate="label" type="select" sortOrder="40" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>Clip to</label>
+                    <source_model>What3Words\What3Words\Model\Config\Source\Clipping</source_model>
+                    <comment>If default option "Select clipping" is selected, autocomplete will clip to the country selected on checkout</comment>
+                </field>
+                <field id="country" translate="label" type="text" sortOrder="50" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>Country iso</label>
+                    <depends>
+                        <field id="clipping">country</field>
+                    </depends>
+                    <comment>2 digit country ISO code</comment>
+                </field>
+                <field id="circle" translate="label" type="text" sortOrder="60" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>Circle coordinates</label>
+                    <depends>
+                        <field id="clipping">circle</field>
+                    </depends>
+                    <comment>Input data as: Latitude,longitude (ex: 51.508,-0.125)</comment>
+                </field>
+                <field id="circle_radius" translate="label" type="text" sortOrder="70" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>Circle radius</label>
+                    <depends>
+                        <field id="clipping">circle</field>
+                    </depends>
+                    <comment>Input circle radius ex: 2 ( this means 2km radius )</comment>
+                </field>
+                <field id="bounding_box_sw" translate="label" type="text" sortOrder="80" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>Southwest coordinates</label>
+                    <depends>
+                        <field id="clipping">bounding-box</field>
+                    </depends>
+                    <comment>Input southwest coordinates</comment>
+                </field>
+                <field id="bounding_box_ne" translate="label" type="text" sortOrder="90" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>Northeast coordinates</label>
+                    <depends>
+                        <field id="clipping">bounding-box</field>
+                    </depends>
+                    <comment>Input northeast coordinates</comment>
+                </field>
+                <field id="polygon" translate="label comment" type="text" sortOrder="90" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>Polygon coordinates string</label>
+                    <depends>
+                        <field id="clipping">polygon</field>
+                    </depends>
+                    <comment>Input Polygon coordinates</comment>
+                </field>
+            </group>
+            <group id="frontend" translate="label" type="text" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>Frontend</label>
+                <field id="placeholder" translate="label" type="text" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>Placeholder text</label>
+                </field>
+                <field id="show_tooltip" translate="label" type="select" sortOrder="20" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>Show input tooltip?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>This will add a tooltip explainer to the what3words field that is visible at the checkout page/customer account</comment>
+                </field>
+                <field id="tooltip_text" translate="label" type="textarea" sortOrder="25" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>Tooltip text</label>
+                    <depends>
+                        <field id="show_tooltip">1</field>
+                    </depends>
+                    <comment>Text to override the default tooltip text ( it supports basic html tags a,span,br )</comment>
+                </field>
+                <field id="override_label" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>Add field label</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>This will add a tooltip explainer to the what3words field that is visible at the checkout page/customer account</comment>
+                </field>
+                <field id="field_label" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>Form field label</label>
+                    <depends>
+                        <field id="override_label">1</field>
+                    </depends>
+                    <comment>This adds a label element to created field. We recommend using the default label but you can customise this if needed</comment>
+                </field>
+                <field id="autosuggest_focus" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>Focus autosuggest to user location</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>This will ask for user permission to get current location so the restults are closer to the user</comment>
+                </field>
+                <field id="invalid_error_message" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>Invalid error message</label>
+                    <comment>Custom error message when there is an invalid error message from the What3Words autosuggest component</comment>
+                </field>
+                <field id="dir_rtl" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>Set html dir RTL for the autocomplete component</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Set to Yes in case of Right to left languages ( Arabic, Hebrew, Persian, Urdu )</comment>
+                </field>
+                <field id="autocomplete_lang" translate="label" type="text" sortOrder="80" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>Language code</label>
+                    <depends>
+                        <field id="dir_rtl">1</field>
+                    </depends>
+                    <comment>Set desired language code for RTL mode ( ex: AR for Arabic )</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

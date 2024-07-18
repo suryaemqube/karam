@@ -1,0 +1,401 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$helper = $objectManager->get('Emqube\ExpressOrder\Helper\Data');
+$request = $objectManager->get('Magento\Framework\App\Action\Context')->getRequest();
+$class='';
+?>
+<?php
+  $base_url = $block->getBaseUrl();
+  $getcoffeetypecollection = $block->getCoffeeNo();
+  $symbol_currency = $block->getDefaultCurrencyCode();
+  
+  if($request->getFullActionName() != 'catalog_category_view' && $request->getFullActionName() != 'coffee_coffee_index' && $request->getFullActionName() != 'coffeeequipment_coffeeequipment_index' && $request->getFullActionName() != 'checkout_cart_configure'){
+    $class='express-band';
+  }
+  
+ 
+  
+  
+?>
+  
+
+ <!-- express order starts -->
+  <div class="express-order-wrapper container">
+   <!-- Shop Online title starts -->
+   <div class="shop-title-wrapp">
+      <h2 class="shop-title">Shop Online</h2>
+      <svg xmlns="http://www.w3.org/2000/svg" width="308.178" height="204.293" viewBox="0 0 308.178 204.293">
+         <g id="Group_173" data-name="Group 173" transform="translate(-813 0)">
+            <path id="Path_129" data-name="Path 129" d="M885.57,190.88h0l38.475,33.512H847.1l-.123.108,38.436,33.453H808.56l-.03.025,38.333,33.32h.271l38.372-33.4h0l38.535-33.5,38.52,33.526h0l-38.51-33.526h.118l-.069-.059-.044.039Zm77.069,67-.039.034h.074Zm-.089.054H885.535L923.878,291.3h.32Z" transform="translate(81.563 -190.841)" fill="#ad987f"/>
+            <path id="Path_130" data-name="Path 130" d="M1084.359,295.65h-.074l-.015.015,38.362,33.389h.109Z" transform="translate(-40.117 -228.573)" fill="#ad987f"/>
+            <path id="Path_131" data-name="Path 131" d="M1006.048,227.52h-.118l38.515,33.522h.005v0h.034l.039-.029Z" transform="translate(-0.316 -193.959)" fill="#ad987f"/>
+            <path id="Path_132" data-name="Path 132" d="M1084.23,295.65v0l0,0,.015.015.015-.015Z" transform="translate(-40.097 -228.573)" fill="#ad987f"/>
+            <path id="Path_133" data-name="Path 133" d="M927.754,159.31l-.044.034,38.485,33.5.044-.034Z" transform="translate(39.423 -159.305)" fill="#ad987f"/>
+            <path id="Path_134" data-name="Path 134" d="M691.445,295.65H614.4l38.534,33.536Z" transform="translate(198.6 -228.573)" fill="#e3dfda"/>
+            <path id="Path_135" data-name="Path 135" d="M731.265,295.69h-.039l-38.5,33.517h77.03l.01,0-.147-.128H692.986l38.308-33.359Z" transform="translate(158.804 -228.593)" fill="#bcbec0"/>
+            <path id="Path_136" data-name="Path 136" d="M731.558,295.74,693.25,329.1h76.636Z" transform="translate(158.54 -228.618)" fill="#827360"/>
+            <path id="Path_137" data-name="Path 137" d="M1161.274,295.65H1084.23l38.53,33.536Z" transform="translate(-40.097 -228.573)" fill="#e3dfda"/>
+            <path id="Path_138" data-name="Path 138" d="M849.33,363.678l.01,0h77.025l-.153-.133H849.478Z" transform="translate(79.244 -263.069)" fill="#bcbec0"/>
+            <path id="Path_139" data-name="Path 139" d="M887.987,295.65l-38.357,33.4h76.734L888.007,295.67h0Z" transform="translate(79.092 -228.573)" fill="#827360"/>
+            <path id="Path_140" data-name="Path 140" d="M849.31,363.815h.02l-.01,0Z" transform="translate(79.254 -263.201)" fill="#919396"/>
+            <path id="Path_141" data-name="Path 141" d="M1120.44,395.183Zm-77.039,0h77.039l-.152-.133h-76.745Z" transform="translate(-37.762 -294.569)" fill="#bcbec0"/>
+            <path id="Path_142" data-name="Path 142" d="M1044.612,295.66l-.005,0,.015.01h-.025l-38.338,33.384h76.734l-38.362-33.389v0Z" transform="translate(-0.484 -228.578)" fill="#827360"/>
+            <path id="Path_143" data-name="Path 143" d="M1162.24,363.55l.152.133h.005l-.153-.133Z" transform="translate(-79.729 -263.069)" fill="#a7a4a3"/>
+            <path id="Path_144" data-name="Path 144" d="M1084.265,295.68h-.005l38.362,33.389h.005Z" transform="translate(-40.112 -228.588)" fill="#726351"/>
+            <path id="Path_145" data-name="Path 145" d="M1084.22,295.66l.02.015v0l-.015-.01Z" transform="translate(-40.091 -228.578)" fill="#827360"/>
+            <path id="Path_146" data-name="Path 146" d="M1084.23,295.655l.015.01h.005l-.015-.015Z" transform="translate(-40.097 -228.573)" fill="#726351"/>
+            <path id="Path_147" data-name="Path 147" d="M846.8,259.13l-38.446,33.477h.064l38.416-33.453Zm-38.51,33.453-.039.034h.079Zm.044.039Z" transform="translate(81.706 -225.515)" fill="#c7c6c5"/>
+            <path id="Path_148" data-name="Path 148" d="M809.6,227.69,771.18,261.143h76.853Z" transform="translate(118.948 -194.046)" fill="#90806e"/>
+            <path id="Path_149" data-name="Path 149" d="M770.81,295.65l-.02.02h.089l.015-.015v0Z" transform="translate(119.146 -228.573)" fill="#afada9"/>
+            <path id="Path_150" data-name="Path 150" d="M770.98,295.675h.039l-.005,0,0,0-.015-.015Z" transform="translate(119.05 -228.578)" fill="#959696"/>
+            <path id="Path_151" data-name="Path 151" d="M809.361,227.52,770.91,261l.039.034h.01l0,0h0l0,0,.015.015,38.446-33.477Z" transform="translate(119.085 -193.959)" fill="#c7c6c5"/>
+            <path id="Path_152" data-name="Path 152" d="M771,295.65v0l.005,0Z" transform="translate(119.04 -228.573)" fill="#afada9"/>
+            <path id="Path_153" data-name="Path 153" d="M771.01,295.655l.015.015.005,0-.015-.015Z" transform="translate(119.034 -228.573)" fill="#959696"/>
+            <path id="Path_154" data-name="Path 154" d="M966.14,227.52l-38.51,33.536h77.02l.01-.01Z" transform="translate(39.464 -193.959)" fill="#90806e"/>
+            <path id="Path_155" data-name="Path 155" d="M927.63,295.69h0Z" transform="translate(39.464 -228.593)" fill="#6c6152"/>
+            <path id="Path_156" data-name="Path 156" d="M1084.19,295.68h.025l-.015-.01Z" transform="translate(-40.076 -228.583)" fill="#6c6152"/>
+            <path id="Path_157" data-name="Path 157" d="M1082.974,227.52H1005.93l38.535,33.536Z" transform="translate(-0.316 -193.959)" fill="#e3dfda"/>
+            <path id="Path_158" data-name="Path 158" d="M769.754,227.52H692.71l38.534,33.536Z" transform="translate(158.814 -193.959)" fill="#e3dfda" opacity="0.49"/>
+            <path id="Path_159" data-name="Path 159" d="M848.055,159.3H771.01l38.535,33.536Z" transform="translate(119.034 -159.3)" fill="#e3dfda" opacity="0.49"/>
+            <path id="Path_160" data-name="Path 160" d="M1004.664,159.3H927.62l38.53,33.536Z" transform="translate(39.469 -159.3)" fill="#e3dfda"/>
+            <path id="Path_161" data-name="Path 161" d="M887.845,159.31,849.34,192.841h.089l38.461-33.492Z" transform="translate(79.239 -159.305)" fill="#e6e7e8"/>
+            <path id="Path_162" data-name="Path 162" d="M887.981,159.39,849.52,192.882h76.941Z" transform="translate(79.147 -159.346)" fill="#9f8c75"/>
+            <path id="Path_163" data-name="Path 163" d="M849.31,227.465h.015l0,0Z" transform="translate(79.254 -193.929)" fill="#e6e7e8"/>
+            <path id="Path_164" data-name="Path 164" d="M887.835,159.3,849.33,192.831l0,0L887.84,159.3Z" transform="translate(79.244 -159.3)" fill="#cbc8c6"/>
+            <path id="Path_166" data-name="Path 166" d="M692.77,370.32l38.382,33.4h.074l.015-.01L692.878,370.32Z" transform="translate(158.784 -266.509)" fill="#ad987f"/>
+            <path id="Path_167" data-name="Path 167" d="M770.939,438.2l0,0H770.9l-.039.034,38.476,33.487h.118Z" transform="translate(119.111 -300.995)" fill="#ad987f"/>
+            <path id="Path_168" data-name="Path 168" d="M770.94,438.2h.03l-.015-.01Z" transform="translate(119.07 -300.99)" fill="#ad987f"/>
+            <path id="Path_169" data-name="Path 169" d="M849.254,506.39l-.044.039,38.485,33.5.044-.039Z" transform="translate(79.305 -335.639)" fill="#ad987f"/>
+            <path id="Path_171" data-name="Path 171" d="M1082.949,370.04h-77.03l-.01.01.148.128h76.636l-38.308,33.359.029.025h.044Z" transform="translate(-0.306 -266.366)" fill="#bcbec0"/>
+            <path id="Path_174" data-name="Path 174" d="M886.73,401.54l.152.133h76.744l.148-.128H886.73Zm77.03,0Z" transform="translate(41.834 -297.866)" fill="#bcbec0"/>
+            <path id="Path_176" data-name="Path 176" d="M1005.9,370.04l0,.01.01-.01Z" transform="translate(-0.301 -266.366)" fill="#919396"/>
+            <path id="Path_177" data-name="Path 177" d="M730.09,401.54Zm0,0,.152.133h76.744l.153-.133Z" transform="translate(121.415 -297.866)" fill="#bcbec0"/>
+            <path id="Path_179" data-name="Path 179" d="M692.68,370.045l.152.133h0l-.152-.138Z" transform="translate(158.83 -266.366)" fill="#a7a4a3"/>
+            <path id="Path_180" data-name="Path 180" d="M692.99,370.32l38.362,33.389,0,0L692.995,370.32Z" transform="translate(158.672 -266.509)" fill="#726351"/>
+            <path id="Path_181" data-name="Path 181" d="M770.98,438.18l.015.015,0,0-.015-.01Z" transform="translate(119.05 -300.985)" fill="#827360"/>
+            <path id="Path_182" data-name="Path 182" d="M770.97,438.185l.015.01h.005l-.015-.015Z" transform="translate(119.055 -300.985)" fill="#726351"/>
+            <path id="Path_183" data-name="Path 183" d="M1121.66,469.71l.039.034.039-.034Zm0,0Z" transform="translate(-77.521 -332.5)" fill="#c7c6c5"/>
+            <path id="Path_184" data-name="Path 184" d="M1084.255,438.18l-.015.015h.083l.02-.015Z" transform="translate(-40.102 -300.985)" fill="#afada9"/>
+            <path id="Path_185" data-name="Path 185" d="M1084.2,438.18l.015.01.02-.01Z" transform="translate(-40.082 -300.985)" fill="#959696"/>
+            <path id="Path_186" data-name="Path 186" d="M1044.445,438.18h-.059l-38.416,33.453.034.029,38.446-33.477Z" transform="translate(-0.337 -300.985)" fill="#c7c6c5"/>
+            <path id="Path_188" data-name="Path 188" d="M1084.18,438.18l0,0,0,0Z" transform="translate(-40.072 -300.985)" fill="#959696"/>
+            <path id="Path_189" data-name="Path 189" d="M1044.486,438.19l-38.446,33.477.064.054,38.451-33.482-.044-.039h0l-.005,0,0,0Z" transform="translate(-0.373 -300.99)" fill="#c7c6c5"/>
+            <path id="Path_190" data-name="Path 190" d="M1084.23,438.21h0Z" transform="translate(-40.097 -301)" fill="#afada9"/>
+            <path id="Path_191" data-name="Path 191" d="M1084.19,438.185l.015.01.005,0-.015-.01Z" transform="translate(-40.076 -300.985)" fill="#959696"/>
+            <path id="Path_193" data-name="Path 193" d="M927.6,438.18h0Z" transform="translate(39.479 -300.985)" fill="#6c6152"/>
+            <path id="Path_194" data-name="Path 194" d="M771,438.18l.015,0,.01,0Z" transform="translate(119.04 -300.985)" fill="#6c6152"/>
+            <path id="Path_199" data-name="Path 199" d="M966.1,506.39H966L927.54,539.882l.044.039,38.505-33.531.01.01Z" transform="translate(39.509 -335.639)" fill="#e6e7e8"/>
+            <path id="Path_201" data-name="Path 201" d="M966.135,506.39,927.63,539.921l0,.01,38.51-33.531Z" transform="translate(39.464 -335.639)" fill="#cbc8c6"/>
+         </g>
+      </svg>
+   </div>
+   <!-- Shop Online title ends -->
+   <div class="row inside-wrap <?php echo $class;?>">
+    <?php if($helper->isEnable()) :?>
+     <?php if($class==''):?>
+      <div class="col-md-2 label-express">
+         <span>Express Order</span> 
+      </div>
+      <div class="filter-div-container">
+         <div class="type-sel">
+            <label for="staticEmail2" class="">Type</label>
+            <select name="coffee_type" id="coffee_type">
+               <option value="">Select Type</option>
+               <?php 
+                if(!empty($getcoffeetypecollection)){
+
+                  foreach ($getcoffeetypecollection as $key_type => $value_type) {?>
+                    <option value="<?php echo $value_type['value']; ?>"><?php echo $value_type['label']; ?></option>
+                <?php   
+                  }
+                }
+
+                ?>
+            </select>
+         </div>
+
+         <div class="range">
+            <label for="inputPassword2" class="">Coffee Range</label>
+
+            <select name="coffee_range" id="coffee_range" class="control-select2" disabled>
+                <option value=" ">Select Coffee Range</option>
+            </select>
+            
+         </div>
+
+         <div class="size">
+            <label for="inputPassword2" class="">Packing Size</label>
+            <select name="coff_weight" id="coff_weight" disabled>
+               <option value="">Select </option>
+            </select>
+          
+         </div>
+         
+         <div class="quantity">
+            <label for="inputPassword2" class="">Qty.</label>
+            <input type="text" name="quantity" id="quantity" placeholder="Quantity" value="1" disabled maxlength="2">
+         </div>
+         <div class="price">
+            <input type="hidden" name="price" id="price" placeholder="Price" value="">
+            <input type="hidden" name="orignalprice" id="orignalprice" value="">
+            <div class="price-show-wrapper">
+               <span class="price-show" id="price-show">AED 0.00</span>
+            </div>
+         </div>
+         <div class="add-cart-btn actions-button">
+            <button type="button" class="btn btn-primary mb-2 add-button" id="add-to-cart">Add to Cart</button>   
+         </div>
+         <!-- <div class="checkout-btn actions-button">
+            <a href="#" id="checkout-link" class="checkout-link">Checkout</a>
+         </div> -->
+      </div>
+      <?php endif;?> 
+      <?php endif;?> 
+   </div>
+</div>
+
+<!-- express order ends -->
+<?php if($helper->isEnable()) :?>
+  <?php if($class==''):?>
+  <script type="text/javascript">
+    
+    require([
+              'jquery',
+              'jquery/ui'
+
+            ], function ($) 
+            {
+
+                  var currency = '<?php echo $symbol_currency?>';
+                 jQuery(document).ready(function (e){
+          
+                     jQuery( "#coffee_type" ).change(function() {
+                        var coffee_type = jQuery('#coffee_type').val();
+                        
+                        jQuery('#quantity').prop('disabled', true);
+                        jQuery('#quantity').val(1);
+                        jQuery('#orignalprice').val('');
+                        jQuery('#price').val('');
+                        jQuery('#price-show').html(currency+' 0.00');
+                        jQuery('#coff_weight').html('');
+                         if (coffee_type!='') {
+                           jQuery.ajax({ 
+                        
+                              url: "<?php echo $base_url;?>coffeerange/coffeerange/index/",
+                              data: {"coffeetype_value":coffee_type},
+                              type: 'post',
+                              success: function(result)
+                              {
+                                 jQuery('#coffee_range').html('');
+                                 
+                                 
+                                //  jQuery('#quantity').val(1);
+                                 if(Object.keys(result).length !== 0){
+                                  jQuery('#coff_weight').append('<option value="">Select</option>');
+                                  jQuery('#coffee_range').append('<option value="">Select Coffee Range</option>');
+                                   jQuery.each(result, function(i, obj) {
+                                      // modified by surya for excluding subscription products
+                                      console.log(obj);
+                                      if (obj.subenb != 1 && obj.id !=2224) {
+                                        jQuery('#coffee_range').append('<option is_s='+obj.subenb+'  value='+obj.id+' >'+obj.label+'</option>');
+                                      }
+                                      // modified by surya for excluding subscription products
+                                 
+                                   });
+                                   jQuery('#coffee_range').prop('disabled', false);
+                                 
+                                  
+                                 }
+                              }
+                           });
+                         }
+                       
+                     });
+                  
+                     jQuery( "#coffee_range" ).change(function() {
+                        var coffee_type = jQuery('#coffee_type').val();
+                        var coffee_range = jQuery('#coffee_range').val();
+                        jQuery('#quantity').prop('disabled', true);
+                        jQuery('#quantity').val(1);
+                        jQuery('#orignalprice').val('');
+                        jQuery('#price').val('');
+                        jQuery('#price-show').html(currency+' 0.00');
+                        jQuery('#coff_weight').html('');
+                         if (coffee_type!='' && coffee_range!='') {
+                           jQuery.ajax({ 
+                            
+                              url: "<?php echo $base_url;?>coffeeweight/coffeeweight/index/",
+                              data: {"coffeetype_value":coffee_type,"product_id":coffee_range},
+                              type: 'post',
+                              success: function(result)
+                              {
+                                 
+                                 
+                                 if(Object.keys(result).length !== 0){
+                                  
+                                   jQuery('#coff_weight').append('<option value="">Select</option>');
+                                   jQuery.each(result, function(i, obj) {
+                                       jQuery('#coff_weight').append('<option value='+obj.value+'>'+obj.label+'</option>');
+                                 
+                                   });
+                                   jQuery('#coff_weight').prop('disabled', false);
+                                  
+                                  
+                                 }
+                              }
+                           });
+                         }
+                       
+                     });  
+                  
+                     
+                     
+
+                    //quantity
+                    jQuery('#quantity').keypress(function (e) {    
+                       
+                      
+                       var charCode = (e.which) ? e.which : event.keyCode    
+                   
+                       if (String.fromCharCode(charCode).match(/[^0-9]/g)){
+                         return false;    
+                       }
+                     
+                   
+                    }); 
+
+                    //price double
+                    jQuery('#quantity').keyup(function (e) {    
+                        var coffee_type = jQuery('#coffee_type').val();
+                        var coffee_range = jQuery('#coffee_range').val();
+                        var coff_weight = jQuery('#coff_weight').val();
+                        if(coffee_range!='' && coffee_type!='' && coff_weight!=''){
+                          var quantity = jQuery('#quantity').val();
+                          var price = jQuery('#orignalprice').val();
+                          if(quantity!=''){
+                            var final_total= parseFloat(price) * parseInt(quantity);
+                            jQuery('#price').val(final_total);
+                            jQuery('#price-show').html(currency+' '+parseFloat(final_total).toFixed(2)+'');
+                            //jQuery('#price-show').html(currency+' '+parseFloat(final_total)+'');
+                            //jQuery('#price-show').html(currency+' '+final_total+'');
+                          }else{
+                         
+                            jQuery('#price-show').html(currency+' 0.00');
+                          }
+        
+                        }else{
+                       
+                          jQuery('#price-show').html(currency+' 0.00');
+                        }
+                     
+                    });  
+
+                    //to check cart items and redirec to checkout
+                    jQuery( "#checkout-link" ).click(function() {
+                         jQuery.ajax({ 
+                           url: "<?php echo $base_url;?>cartitems/cartcount/index/",
+                           type: 'get',
+                           success: function(result)
+                           {
+                             
+                             if(result=='0'){
+                               alert('cart is empty')
+                             }else{
+                               window.location = "<?php echo $base_url;?>checkout/";
+                             }
+                   
+                           }
+                         }); 
+                     });
+
+                       jQuery("#coff_weight" ).change(function() {
+                        jQuery('#price').val('');
+                        jQuery('#price-show').html(currency+' 0.00');
+                          var coffee_range = jQuery('#coffee_range').val();
+                          var coffee_type = jQuery('#coffee_type').val();
+                          var coff_weight = jQuery('#coff_weight').val();
+                          if(coffee_range!='' && coffee_type!='' && coff_weight!=''){
+                            jQuery('#quantity').prop('readonly', false);
+                            jQuery.ajax({ 
+                              url: "<?php echo $base_url;?>prices/price/index/",
+                              
+                              data: {"product_id":coffee_range,"coffee_type":coffee_type,"coff_weight":coff_weight},
+                              type: 'post',
+                              success: function(result)
+                              {
+                                
+                                if(result!=''){
+                                  console.log(result.price);
+                                  jQuery('#price').val(result.price);
+                                  jQuery('#orignalprice').val(result.price);
+                                  jQuery('#price-show').html(currency+' '+parseFloat(result.price).toFixed(2)+'');
+                                  //jQuery('#price-show').html(currency+' '+parseFloat(result.price)+'');
+                                  //jQuery('#price-show').html(currency+' '+result.price+'');
+                                  jQuery('#quantity').prop('disabled', false);
+                                 
+                                }
+                      
+                              }
+                            });  
+                          }
+                          
+                      });
+                  
+                    
+
+                 //to add the ccart
+                 jQuery( "#add-to-cart" ).click(function() {
+                   var quantity = jQuery('#quantity').val();
+                   var price = jQuery('#price').val();
+                   var coffee_range = jQuery('#coffee_range').val();
+                   var coffee_type = jQuery('#coffee_type').val();
+                   var coff_weight = jQuery('#coff_weight').val();
+               
+                   if(quantity!='' && price!='' && coffee_range!='' && coffee_type!='' && coff_weight!=''){ 
+                     jQuery.ajax({ 
+                         url: "<?php echo $base_url;?>addcart/addcart/index/",
+                         
+                         data: {"product_id":coffee_range,"quantity":quantity,"price":price,"coffee_type":coffee_type,"coff_weight":coff_weight},
+                         type: 'post',
+                         success: function(result)
+                         {
+                           
+                           console.log(result)
+     
+                         }
+                       }); 
+                     
+                   }else{
+                     alert('Please fill all the fields to add to cart')
+                   }
+                 });
+
+
+                 //to check cart items and redirec to checkout
+                //  jQuery( "#checkout-link" ).click(function() {
+                //        jQuery.ajax({ 
+                //          url: "?php //echo $base_url;?>cartitems/cartcount/index/",
+                //          type: 'get',
+                //          success: function(result)
+                //          {
+                           
+                //            if(result=='0'){
+                //              alert('cart is empty')
+                //            }else{
+                //              window.location = "?php //echo $base_url;?>checkout/";
+                //            }
+     
+                //          }
+                //        }); 
+                //  });
+
+
+              });
+
+
+
+
+          });
+  </script>
+  <?php endif;?>
+<?php endif;?>

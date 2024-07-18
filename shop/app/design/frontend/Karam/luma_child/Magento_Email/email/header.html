@@ -1,0 +1,162 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!--@subject {{trans "Header"}} @-->
+<!--@vars {
+"var logo_height":"Email Logo Image Height",
+"var logo_width":"Email Logo Image Width",
+"var template_styles|raw":"Template CSS"
+} @-->
+
+<!DOCTYPE html>
+<html bgcolor="#F7F8F8" style="background-color:#F7F8F8">
+
+    <head>
+        <title>Themes.email</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <meta content="width=device-width" name="viewport" />
+        <style type="text/css">
+            p:first-of-type {margin-top:0 !important}
+            p:last-of-type {margin-bottom:0 !important}
+            a.btn:hover {background-color:#F7F8F8 !important}
+            table#footer td a:link {color:#7B858B !important;font-weight:bold !important;text-decoration:none !important;font-size:12px !important}
+            table#footer td a:visited {color:#7B858B !important;font-weight:bold !important;text-decoration:none !important;font-size:12px !important}
+            table#footer td a:hover {color:#7B858B !important;font-weight:bold !important;text-decoration:none !important;font-size:12px !important}
+            table#footer td a:active {color:#7B858B !important;font-weight:bold !important;text-decoration:none !important;font-size:12px !important}
+            table#footer td a:hover {text-decoration:underline !important}
+            table#footer td a:active {text-decoration:underline !important}
+            h1 { font-size: 32px; line-height: 1.2;}
+            h2 {font-size: 30px; line-height: 1.2;}
+            h3 {font-size: 28px; line-height: 1.1;}
+            h4 {font-size: 26px; line-height: 1.1;}
+            h5 {font-size: 24px; line-height: 1.1;}
+            h6 {font-size: 22px; line-height: 1.1;}
+            p {font-size: 13px; line-height: 1.4;}
+            td.first_wrap {
+                padding-right: 14px;
+                border-right: 2px dotted #dfdfdf;
+                width: 60%;
+            }
+
+            td.first_wrap h1 {
+                font-size: 18px !important;
+                text-transform:  uppercase;
+                font-weight: 900 !important;
+                color: #646464;
+                line-height:  1.2 !important;
+            }
+
+            td.first_wrap p {
+                font-size:  14px;
+                line-height: 24px;
+                color: #6c6c6c;
+            }
+
+            td.second_wrap {
+                padding-left: 5px;
+                width: 40%;
+                text-align:  right;
+                color: #646464;
+            }
+
+            td.second_wrap strong {
+                font-size: 16px;
+                margin-bottom: 15px;
+                display:  block;
+            }
+
+            td.second_wrap h3 {
+                font-size: 15px !important;
+                margin-bottom:  0 !important;
+                margin-top:  0  !important;
+                line-height:  1.2 !important;
+                margin-bottom:  5px !important;
+            }
+            td.item-info.has-extra strong em {
+                font-style: inherit !important;
+                color: #7b858b;
+            }
+            dl.item-options {
+                padding-left:  0 !important;
+                margin-top: 6px !important;
+                margin-bottom:  6px !important;
+            }
+
+            p.sku {
+                font-size: 13px !important;
+            }
+            .unit_price {
+                font-size: 12px;
+                line-height: 1.2;
+            }
+
+            @media only screen and (max-width:600px)  {
+                table[class~="container"] { width: 100% !important; }
+            }
+            tbody a, .rps_bce0 a, .rps_bce0 a:active, .rps_bce0 a , .rps_bce0 a:hover{
+              color: #8C2433 !important;
+              text-decoration: none !important;
+
+            }
+            tr.x_totals-tax {
+                display: none;
+            }
+            {{var template_styles|raw}}
+
+            {{css file="css/email.css"}}
+        </style>
+    </head>
+
+    <body bgcolor="#F7F8F8" height="100% !important" style='-webkit-font-smoothing:antialiased; -webkit-text-size-adjust:none; width:100% !important; height:100% !important; font-family:"Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; background-color:#F7F8F8' width="100% !important">
+        {{inlinecss file="css/email-inline.css"}}
+       
+        <table cellpadding="0" cellspacing="0" class="container" id="container" style="margin:0 auto; width:700px" width="700">
+            <tr>
+                <td class="outer" style="vertical-align:top; padding:64px 10px">
+                    <table cellpadding="0" cellspacing="0" class="container" id="header" style="margin:0 auto; width:700px" width="700">
+                        <tr>
+                            <td align="left" bgcolor="#755733" style="vertical-align:top; background-color:#755733; text-align:left; padding:20px; padding-left: 30px; width: 56%; border-top-left-radius:0px; border-top-right-radius:0px; background-image: url('{{store url=''}}pub/media/email/background.jpg');">
+                                <a class="logo" href="{{store url=""}}" target="_blank">
+                                    <img
+                                        {{if logo_width}}
+                                            width="{{var logo_width}}"
+                                        {{else}}
+                                            width="70"
+                                        {{/if}}
+
+                                        {{if logo_height}}
+                                            height="{{var logo_height}}"
+                                        {{else}}
+                                            height="50"
+                                        {{/if}}
+
+                                        src="{{var logo_url}}"
+                                        alt="{{var logo_alt}}"
+                                        border="0"
+                                        style="max-width:100%"
+                                    />
+                                </a>
+                            </td>
+                            <td align="right" class="contact" bgcolor="#755733" style="vertical-align:top; background-color:#755733; text-align:left; vertical-align: middle; width: 37%; padding:20px; border-top-left-radius:0px; border-top-right-radius:0px; background-image: url('{{store url=''}}pub/media/email/background.jpg');">
+                                <p style="margin-bottom:10px; text-align:left; font-size:15px; margin-top:5%; color: #ffffff;">
+                                    <span style="font-size:18px; font-weight:600; padding-bottom: 2px; display: inline-block;">{{config path="general/store_information/name"}}</span>
+                                    <br>
+                                    Call us: {{config path="general/store_information/phone"}}
+                                    <br>
+                                    Email: sales@karamfoods.ae
+                                   
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                    <table cellpadding="0" cellspacing="0" class="container" id="body" style="margin:0 auto; width:700px" width="700">
+                        <tr>
+                            <td bgcolor="#fff" class="body" style="vertical-align:top; padding:50px 64px; border-left:1px solid #E6E8E9; border-right:1px solid #E6E8E9; border-bottom:1px solid #E6E8E9; background-color:#fff; border-bottom-left-radius:3px; border-bottom-right-radius:3px">
+                                <table cellpadding="0" cellspacing="0" id="body-inner" style="width: 100%;" width="100%">
+                                    <tr>
+                                        <td id="emailcontent" class="intro-copy" style="vertical-align:top; padding-bottom:30px; font-size: 13px;">
+
+                                            <!--  Here Goes Content: Start  -->

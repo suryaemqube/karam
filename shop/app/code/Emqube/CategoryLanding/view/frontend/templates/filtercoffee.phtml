@@ -1,0 +1,28 @@
+<?php 
+$getattributes = $block->getattributes();
+$cate_url='';
+$cate_url=$block->GetCategoryUrl(41);
+$coffee_range_para = 'coffee_type';
+$base_url =$block->get_base_url();
+?>
+<!-- attributes  starts -->
+
+    
+    <?php if(!empty($getattributes) || $getattributes!=''): ?>
+          <div class="row filter-wrapper">
+            <ul class="row filter-list-wrapper attribute-filter">        
+            <?php
+                foreach ($getattributes as $attributes) {
+            ?>  
+
+              <li class=""><a href="<?php echo $cate_url."?".$coffee_range_para."=".$attributes['value'];?>"><?php echo $attributes['label'];?></a></li>
+
+          <?php 
+      		} 
+           ?>
+              
+            </ul>
+          </div>
+      <?php endif; ?>
+        
+<!-- attributes  ends -->

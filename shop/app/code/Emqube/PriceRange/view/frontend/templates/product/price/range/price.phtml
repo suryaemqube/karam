@@ -1,0 +1,92 @@
+<?php /** @var \Magento\Framework\Pricing\Render\Amount $block */ ?>
+<?php /** @var \Magento\ConfigurableProduct\Pricing\Render\FinalPriceBox $block */
+/** @var \Magento\Framework\Pricing\Price\PriceInterface $priceModel */ ?>
+
+<?php
+$product = $block->getProduct();
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+$prod_id = $block->getProductId();
+
+
+
+?>
+
+<div class="price-box range second price-final_price pradnya" data-role="priceBox"
+	data-product-id="<?php /* @escapeNotVerified */ echo $prod_id; ?>" prod-id="<?php echo $prod_id; ?>">
+	<?php $product3 = $objectManager->get('Magento\Catalog\Model\ProductRepository')->getById($prod_id); ?>
+
+	<?php
+
+	$productType = $product3->getTypeId();
+	$variations = 1;
+	$childProductPrice = array();
+	if ($productType == \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE) {
+
+		$configurableAttributes = $product3->getTypeInstance()->getConfigurableAttributes($product3);
+		$childProducts = $product3->getTypeInstance()->getUsedProducts($product3);
+
+		foreach ($configurableAttributes as $attribute) {
+			$variations *= count($attribute->getOptions());
+		}
+
+		foreach($childProducts as $child) {
+            $price = number_format($child->getPrice('regular_price'), 2, '.', '');
+            if($price) {
+                $childProductPrice[] = $price;
+            } 
+        }
+	}
+
+	$regular_file = $product3->getPriceInfo()->getPrice('regular_price')->getAmount()->getValue();
+	$Price_formatted = number_format($regular_file, 2, '.', '');
+
+	?>
+
+	<span class="special-price">
+		<span class="price-container price-final_price">
+			<?php if ($block->getDisplayLabel()): ?>
+				<span class="price-label">
+					<?php /* @escapeNotVerified */ echo $block->getDisplayLabel(); ?>
+				</span>
+			<?php endif; ?>
+			<span <?php if ($block->getPriceId()): ?> id="<?php /* @escapeNotVerified */ echo $block->getPriceId() ?>"
+				<?php endif; ?> data-price-amount="" data-price-type="finalPrice1" class="price-wrapper">
+				<span class="price">
+					<?php /* @escapeNotVerified */ echo $block->getDisplayValue(); ?>
+				</span>
+			</span>
+		</span>
+	</span>
+
+	<?php # if ($regular_file > 0 && $variations == 1) { ?>
+		<!-- <span class="normal-price old-price sly-old-price 1">
+			<span class="price-container">
+				<?php # if ($block->getDisplayLabel('Regular Price')): ?>
+					<span class="price-label">
+						<?php /* @escapeNotVerified */ # echo $block->getDisplayLabel('Regular Price'); ?>
+					</span>
+				<?php # endif; ?>
+				<span <?php # if ($block->getPriceId()): ?> id="<?php /* @escapeNotVerified */ # echo $block->getPriceId() ?>"
+					<?php # endif; ?> data-price-amount="" data-price-type="oldPrice" class="price-wrapper">
+					<span class="price">AED
+						<?php /* @escapeNotVerified */ # echo $Price_formatted; ?>
+					</span>
+				</span>
+			</span>
+		</span> -->
+	<?php # } else if ($regular_file > 0 && $variations > 1) {  ?>
+		<!-- <span class="normal-price old-price sly-old-price 2">
+			<span class="price-container">
+				<span <?php # if ($block->getPriceId()): ?> id="<?php /* @escapeNotVerified */ # echo $block->getPriceId() ?>"
+					<?php # endif; ?> data-price-amount="" data-price-type="oldPrice" class="price-wrapper">
+					<span class="price">AED
+						<?php #  print_r(min($childProductPrice) ." - ". max($childProductPrice));?>
+					</span>
+				</span>
+			</span>
+		</span> -->
+	<?php # } ?>
+
+</div>

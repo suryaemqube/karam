@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="3columns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="default_head_blocks"/>
+    <body>
+        <referenceBlock name="sale.reorder.sidebar" remove="true"/>
+            <referenceContainer name="header.container">
+             <referenceBlock name="top.search" remove="true"/>
+             <referenceBlock name="skip_to_content" remove="true"/>
+             <referenceBlock name="store_language" remove="true"/>
+             <referenceBlock name="navigation.sections" remove="true"/>
+              <referenceBlock name="header.panel.wrapper" remove="true" />
+            <!--  <referenceBlock name="top.links" remove="true"/> -->
+                
+
+           <!--  </container> -->
+            <referenceContainer name="header-wrapper" htmlClass="container">
+                <!-- <container name="container-flex" htmlTag="div"> -->
+                    <container name="header-d-flex" label="Page Header" as="header-wrapper" htmlTag="div" htmlClass="d-flex">
+                    
+                        <block class="Magento\Theme\Block\Html\Header\Logo" name="logo"/>
+
+                        <container name="right-menu" htmlTag="div" htmlClass="right-menu d-flex">
+                            
+                             <block  class="Magento\Framework\View\Element\Template" name="custom-header" template="Magento_Theme::html/custom/customheader.phtml" before="header.container"/>
+
+                             <block  class="Magento\Framework\View\Element\Template" name="custom-ulstart" template="Magento_Theme::html/custom/headercomponents/ulstart.phtml" before="header.container"/>
+
+                             <block  class="Magento\Framework\View\Element\Template" name="custom-account" template="Magento_Theme::html/custom/account_links.phtml" before="header.container"/>
+
+                             <block  class="Magento\Framework\View\Element\Template" name="custom-ulclose" template="Magento_Theme::html/custom/headercomponents/ulclose.phtml" before="header.container"/>
+
+
+                        </container>
+                     </container>
+                <!-- </container> -->
+
+
+                <container name="header-mobile" label="Page Header" htmlTag="div" htmlClass="mobile-menu-wrapper" after="custom-header">
+                    
+                    <block  class="Magento\Framework\View\Element\Template" name="mobile-bg-image" template="Magento_Theme::html/custom/mobile_bgimage.phtml"/>
+                    <container name="inside-mobile" htmlTag="div" htmlClass="container">
+                     <block  class="Magento\Framework\View\Element\Template" name="mobile-tabs" template="Magento_Theme::html/custom/tabs.phtml"/>
+                     <block  class="Magento\Framework\View\Element\Template" name="section-start" template="Magento_Theme::html/custom/headercomponents/section_start.phtml"/>
+
+                     <block  class="Magento\Framework\View\Element\Template" name="tab-one" template="Magento_Theme::html/custom/tab_one.phtml"/>
+
+                     <container name="inside-mobile-tab2" htmlTag="div" htmlId="tab2">
+                        <block  class="Magento\Framework\View\Element\Template" name="custom-account-mobile" template="Magento_Theme::html/custom/account_links.phtml" before="header.container"/>
+                     </container>
+
+                     <block  class="Magento\Framework\View\Element\Template" name="section-end" template="Magento_Theme::html/custom/headercomponents/section_end.phtml"/>
+
+                    </container>
+
+                        
+                </container>
+
+            </referenceContainer>
+             
+
+                 <block  class="Magento\Framework\View\Element\Template" name="custom-megamenu" template="Magento_Theme::html/custom/megamenu.phtml" after="header-wrapper"/>
+
+
+
+             <!-- </container> -->
+       </referenceContainer>
+
+     <!--   <move element="top.links" destination="right-menu" after="custom-header"/> -->
+    <!--    <move element="header.panel" destination="right-menu" after="custom-header"/> -->
+       <move element="minicart" destination="right-menu" after="custom-ulstart"/> 
+
+       <referenceContainer name="footer-container">
+            <container name="footer" htmlTag="div" htmlClass="container d-flex">
+                 <block class="Magento\Framework\View\Element\Template" name="customfooter" template="Magento_Theme::html/custom/customfooter.phtml" />
+                 <block class="Magento\Framework\View\Element\Template" name="report.bugs" template="Magento_Theme::html/bugreport.phtml" ifconfig="design/footer/report_bugs"/>
+            </container>
+            <block class="Magento\Framework\View\Element\Template" name="customcopyrights" template="Magento_Theme::html/custom/copyrights_section.phtml" after="footer" />
+            <referenceBlock name="store_switcher" remove="true"/>
+            <referenceBlock name="footer_links" remove="true"/>
+            <referenceBlock name="copyright" remove="true"/>
+        </referenceContainer>
+    </body>
+</page>

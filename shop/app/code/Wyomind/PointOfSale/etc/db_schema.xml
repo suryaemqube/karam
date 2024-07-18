@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="pointofsale" resource="default" engine="innodb" comment="Point of sales and Warehouses">
+    <column xsi:type="int" name="place_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Place ID"/>
+    <column xsi:type="varchar" name="customer_group" nullable="false" length="255" default="0" comment="Customer group"/>
+    <column xsi:type="varchar" name="store_id" nullable="false" length="255" default="0" comment="Store views"/>
+    <column xsi:type="int" name="position" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Store position"/>
+    <column xsi:type="varchar" name="store_code" nullable="false" length="255" comment="Store code"/>
+    <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Store name"/>
+    <column xsi:type="varchar" name="address_line_1" nullable="true" length="255" comment="Address 1"/>
+    <column xsi:type="varchar" name="address_line_2" nullable="true" length="255" comment="Address 2"/>
+    <column xsi:type="varchar" name="city" nullable="true" length="255" comment="Store City"/>
+    <column xsi:type="varchar" name="state" nullable="true" length="50" comment="Store State"/>
+    <column xsi:type="varchar" name="postal_code" nullable="true" length="50" comment="Store zipcode"/>
+    <column xsi:type="varchar" name="country_code" nullable="true" length="50" comment="Store country code"/>
+    <column xsi:type="varchar" name="main_phone" nullable="true" length="50" comment="Store phone"/>
+    <column xsi:type="varchar" name="email" nullable="true" length="255" comment="Store email"/>
+    <column xsi:type="text" name="hours" nullable="true" comment="Store opening hours"/>
+    <column xsi:type="text" name="description" nullable="true" comment="Store description?"/>
+    <column xsi:type="varchar" name="longitude" nullable="true" length="20" comment="Store location, longitude"/>
+    <column xsi:type="varchar" name="latitude" nullable="true" length="20" comment="Store location, latitude"/>
+    <column xsi:type="boolean" name="status" nullable="false" comment="Store status"/>
+    <column xsi:type="varchar" name="image" nullable="true" length="255" comment="Store image"/>
+    <column xsi:type="text" name="days_off" nullable="true" comment="Days off"/>
+    <column xsi:type="text" name="store_page_url_key" nullable="true" comment="Url Key"/>
+    <column xsi:type="text" name="store_page_content" nullable="true" comment="Content of the store page"/>
+    <column xsi:type="int" name="store_page_enabled" padding="11" unsigned="false" nullable="true" identity="false" default="1" comment="Is the store page enabled?"/>
+    <column xsi:type="int" name="store_locator_description_use_global" padding="11" unsigned="false" nullable="true" identity="false" default="1" comment="Use the global description template?"/>
+    <column xsi:type="text" name="store_locator_description" nullable="true" comment="Description of the store when not using the global description"/>
+    <column xsi:type="int" name="visible_store_locator" padding="11" unsigned="false" nullable="true" identity="false" comment="Visible on store locator"/>
+    <column xsi:type="int" name="visible_product_page" padding="11" unsigned="false" nullable="true" identity="false" comment="Visible on product page"/>
+    <column xsi:type="int" name="visible_checkout" padding="11" unsigned="false" nullable="true" identity="false" comment="Visible on checkout"/>
+    <column xsi:type="int" name="store_page_content_use_global" padding="11" unsigned="false" nullable="true" identity="false" default="1" comment="Use the global page content template?"/>
+    <column xsi:type="int" name="store_page_meta_title_use_global" padding="11" unsigned="false" nullable="true" identity="false" default="1" comment="Use global meta title"/>
+    <column xsi:type="text" name="store_page_meta_title" nullable="true" comment="Meta title"/>
+    <column xsi:type="int" name="store_page_meta_keywords_use_global" padding="11" unsigned="false" nullable="true" identity="false" default="1" comment="Use global meta keywords"/>
+    <column xsi:type="text" name="store_page_meta_keywords" nullable="true" comment="Meta keywords"/>
+    <column xsi:type="int" name="store_page_meta_description_use_global" padding="11" unsigned="false" nullable="true" identity="false" default="1" comment="Use global meta description"/>
+    <column xsi:type="text" name="store_page_meta_description" nullable="true" comment="Meta description"/>
+    <column xsi:type="int" name="store_page_meta_robots_use_global" padding="11" unsigned="false" nullable="true" identity="false" default="1" comment="Use global meta robots"/>
+    <column xsi:type="varchar" name="store_page_meta_robots" nullable="true" length="64" comment="Meta robots"/>
+    <column xsi:type="text" name="store_page_layout_update" nullable="true" comment="Layout update"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="place_id"/>
+    </constraint>
+    <index referenceId="POINTOFSALE_PLACE_ID" indexType="btree">
+      <column name="place_id"/>
+    </index>
+  </table>
+  <table name="pointofsale_attributes" resource="default" engine="innodb" comment="Point of sales and Warehouses Additional Attributes">
+    <column xsi:type="int" name="attribute_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Attribute ID"/>
+    <column xsi:type="varchar" name="code" nullable="false" length="255" default="0" comment="Attribute code"/>
+    <column xsi:type="varchar" name="label" nullable="false" length="255" default="0" comment="Attribute label"/>
+    <column xsi:type="int" name="type" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Attribute Type"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="attribute_id"/>
+      <column name="type"/>
+    </constraint>
+    <index referenceId="POINTOFSALE_ATTRIBUTES_ATTRIBUTE_ID" indexType="btree">
+      <column name="attribute_id"/>
+    </index>
+  </table>
+  <table name="pointofsale_attributes_values" resource="default" engine="innodb" comment="Points of sale attributes values">
+    <column xsi:type="int" name="value_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Value id"/>
+    <column xsi:type="int" name="attribute_id" padding="11" unsigned="false" nullable="true" identity="false" comment="attribute_id"/>
+    <column xsi:type="int" name="pointofsale_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Point of sale id"/>
+    <column xsi:type="text" name="value" nullable="true" comment="value"/>
+    <constraint xsi:type="unique" referenceId="POINTOFSALE_ATTRIBUTES_VALUES_POINTOFSALE_ID_ATTRIBUTE_ID">
+      <column name="pointofsale_id"/>
+      <column name="attribute_id"/>
+    </constraint>
+    <index referenceId="POINTOFSALE_ATTRIBUTES_VALUES_VALUE_ID" indexType="btree">
+      <column name="value_id"/>
+    </index>
+  </table>
+</schema>

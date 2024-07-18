@@ -1,0 +1,11 @@
+<?php 	
+$curr_id ='';
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$currentCategory = $objectManager->get('Magento\Framework\Registry')->registry('current_category');
+$curr_id = $currentCategory->getID();
+$array_category_coffee=array(41,42,43,44,45,46,47,51,52,53,54,55,56);
+ ?>
+
+ <?php 	if (in_array($curr_id,$array_category_coffee)) { ?>
+<p class="open-filter">Browse By</p>
+<?php 	} ?>

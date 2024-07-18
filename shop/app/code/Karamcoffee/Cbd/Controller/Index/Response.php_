@@ -1,0 +1,40 @@
+<?php
+namespace Karamcoffee\Cbd\Controller\Index;
+ 
+use Magento\Framework\App\Action\Context;
+ use Magento\Checkout\Model\Session;
+ use Magento\Sales\Model\OrderFactory;
+class Response extends \Magento\Framework\App\Action\Action
+{
+    protected $_resultPageFactory;
+    protected $checkoutSession;
+    protected $orderFactory;
+ 
+    public function __construct(Context $context, Session $checkoutSession, OrderFactory $orderFactory, \Magento\Framework\View\Result\PageFactory $resultPageFactory)
+    {
+        $this->_resultPageFactory = $resultPageFactory;
+        $this->checkoutSession = $checkoutSession;
+        $this->orderFactory = $orderFactory;
+
+        parent::__construct($context);
+    }
+ 
+    public function execute()
+    {
+        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/meetanshi.log');
+        $logger = new \Zend\Log\Logger();
+        $logger->addWriter($writer);
+        $logger->info(__CLASS__ .'::'.__FUNCTION__.':: START');
+
+        $orderState = 'new';
+        $orderStatus = 'pending_payment';
+        $orderId = $this->checkoutSession->getLastOrderId();
+        //if($this->checkoutSession->getLastOrderStatus() == 'pending'){
+            $order = $this->orderFactory->create()->load($orderId);
+            $order->setState($orderStatus)->setStatus($orderStatus);
+            $order->save();
+            $resultPage = $this->_resultPageFactory->create();
+            return $resultPage;
+        //}
+    }
+}

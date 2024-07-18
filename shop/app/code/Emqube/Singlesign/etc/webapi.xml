@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+	<route method="GET" url="/V1/emqube-singlesign/cart">
+		<service class="Emqube\Singlesign\Api\CartManagementInterface" method="getPost"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+
+	<route method="GET" url="/V1/emqube-cartid/getcartid/:id">
+		<service class="Emqube\Singlesign\Api\CartInfoInterface" method="getCart"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+</routes>   

@@ -1,0 +1,79 @@
+<!--
+Copyright © 2018 Wyomind. All rights reserved.
+See LICENSE.txt for license details.
+-->
+
+<script>
+
+    require(["jquery",'jquery/ui','ko'], function ($) {
+        $(function () {
+            var interval;
+            interval = setInterval(updateDiv,3000);
+            function updateDiv(){
+                var value_count = jQuery('input[name=company]').length;
+                if (value_count > 0) {
+                    clearInterval(interval);
+                    myfunction();
+                }
+                console.log(value_count)
+            }
+            
+
+            function myfunction(){
+
+                var locationType = ['Home','Work'];
+                jQuery('input[name=company]').val(locationType[0]);
+                var selectInput = '<select class="select" name="location_type" id="location_type" aria-invalid="false">';
+                for(var i=0; i < locationType.length; i++ ){
+                selectInput += '<option data-title="'+locationType[i]+'" value="'+locationType[i]+'">'+locationType[i]+'</option>"';
+                }
+                selectInput += '</select>';
+
+                jQuery('input[name=company]').after(selectInput);
+                
+                jQuery('input[name=company]').css('display', 'none');
+
+                jQuery('#location_type').change(function(event){
+                    
+                    jQuery('input[name=company]').val(event.target.value)
+                })
+
+                // jQuery('input[name=telephone]').keyup(function(){
+                //     console.log(jQuery('input[name = telephone]'));
+                //     var get_value = jQuery('input[name = telephone]').val();
+                //     console.log(get_value);
+                //     if (get_value.charAt(0)!='0') {
+                //         jQuery("input[name=telephone]").val('');
+                //     }else{
+                //         if(get_value.length > 1){
+                //             if (get_value.charAt(1)!='5') {
+                //                 jQuery("input[name=telephone]").val('');
+                //                 jQuery("input[name=telephone]").val('0');
+                //             }
+                                
+                //         }
+                   
+                //     }
+
+                // });
+                
+            }
+
+
+
+
+         
+
+                
+
+
+
+         
+                    
+            
+                
+                
+          
+        });
+    });
+</script>

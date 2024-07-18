@@ -1,0 +1,283 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$currentCategory = $objectManager->get('Magento\Framework\Registry')->registry('current_category');
+$parent_id='';
+$parent_id = $currentCategory->getparent_id();
+$curr_id = $currentCategory->getID();
+$baseurl_cut =  $currentCategory->getUrl();
+$url_cat_parent='';
+
+$arraycofee_type_brand=array();
+$arraycofee_roastprofile=array();
+$array_brand=array();
+
+$array_category=array(41,42,43,44,45,46,62,47,51,52,53,54,55,56);
+$array_category_coffeeequipment=array(51,52,53,54,55,56);
+$array_category_coffee=array(41,42,43,44,45,46,62);
+
+if ($parent_id==2) {
+    $url_cat_parent=$baseurl_cut;
+}else{
+    $url_cat_parent=$block->getCategoryUrl($parent_id);
+    if ($url_cat_parent!='') {
+        $url_cat_parent = $url_cat_parent;
+    }
+    
+}
+
+
+
+$get_value_params_coffee='null';
+$get_value_params_roast='null';
+$get_value_params_brand='null';
+if(isset($_GET['coffee_type']) && $_GET['coffee_type']!=''){
+    
+    $get_value_params_coffee = $_GET['coffee_type'];
+
+}
+if(isset($_GET['roast_profile']) && $_GET['roast_profile']!=''){
+    
+    $get_value_params_roast = $_GET['roast_profile'];
+
+}
+if(isset($_GET['product_brand']) && $_GET['product_brand']!=''){
+    $get_value_params_brand = $_GET['product_brand'];
+
+}
+
+if (in_array($curr_id,$array_category_coffee)) {
+    
+    $arraycofee_type = $block->get_coffeetype_attribute($curr_id,$get_value_params_roast);
+    $arraycofee_roastprofile = $block->get_roastprofile_attribute($curr_id,$get_value_params_coffee);
+
+}else if(in_array($curr_id,$array_category_coffeeequipment)){
+   $array_brand=$block->getproduct_brand_attribute($curr_id);
+}
+// else if(!empty($getattributes) && count($getattributes) == 1){
+//     $get_value_params = $getattributes[0]['value'];
+// }
+
+$coffee_type_para = 'coffee_type';
+$coffee_roast_para = 'roast_profile';
+$coffee_brand_para = 'product_brand';
+?>
+<?php if(in_array($curr_id,$array_category_coffee)):?>
+
+    <div class="filter-wrapper type">
+     <div class="type-sel">
+       <label for="staticEmail2" class="">Type</label>
+       <select name="coffeetypefilter_get" id="coffeetypefilter">
+        <option value="">Select</option>
+        <?php
+
+            foreach ($arraycofee_type as $coff_type) {
+               if($get_value_params_coffee ==$coff_type['value']){
+                  $selected='selected';
+               }else{
+                 $selected='';
+               }
+                        
+        ?>
+                        
+        <option value="<?php echo $coff_type['value'];?>" <?php echo  $selected;?>><?php echo $coff_type['label'];?></option>
+            
+        <?php
+          }
+            
+        ?>
+    
+       </select>
+     </div>
+    </div>
+
+    <div class="filter-wrapper roast">
+      <div class="type-sel">
+        <label for="staticEmail2" class="">Roast Profile</label>
+        <select name="roast_profile_filter_get" id="roast_profile_filter">
+        <option value="">Select</option>
+        <?php
+
+            foreach ($arraycofee_roastprofile as $raost_prof) {
+               if($get_value_params_roast ==$raost_prof['value']){
+                  $selected_prof='selected';
+               }else{
+                 $selected_prof='';
+               }
+                        
+        ?>
+                        
+        <option value="<?php echo $raost_prof['value'];?>" <?php echo  $selected_prof;?>><?php echo $raost_prof['label'];?></option>
+            
+        <?php
+          }
+            
+        ?>
+        </select>
+      </div>
+    </div>
+
+
+    <script type="text/javascript">
+         require([
+              'jquery',
+              'jquery/ui'
+
+            ], function ($) 
+            {
+
+
+                jQuery(document).ready(function (e){
+                 //jQuery(document).on('pagecreate', function() {
+                    var coffee_type_url='';
+                    var coffee_raost_url='';
+                    var base_url='';
+                    coffee_type_url='<?php echo $url_cat_parent; ?>?<?php echo $coffee_type_para; ?>';
+                    coffee_raost_url='<?php echo $url_cat_parent; ?>?<?php echo $coffee_roast_para; ?>';
+                    var base_url='<?php echo $baseurl_cut; ?>';
+
+                    //jQuery( "#coffeetypefilter" ).change(function() {
+                      jQuery(document).on('change','#coffeetypefilter',function(){ 
+                          var coffeetype_value = jQuery(this).val();
+                          var coffeeraost_value = jQuery("#roast_profile_filter").val();
+
+                        //var coffeetype_value = jQuery("#coffeetypefilter").val();
+                        //var coffeetype_value = document.getElementById("coffeetypefilter");
+                        //var coffeetype_value = coffeetype_value.options[coffeetype_value.selectedIndex].value;
+                        //var e = document.getElementsByName("coffeetypefilter_get")[0];
+                         //var coffeetype_value = e.options[e.selectedIndex].value;
+
+                        //console.log(coffeetype_value);
+                        if (coffeetype_value!='' && coffeeraost_value=='' ) {
+                           location.href=base_url+'?coffee_type='+coffeetype_value;
+                        }else if(coffeetype_value!='' && coffeeraost_value!=''){
+                          location.href=base_url+'?coffee_type='+coffeetype_value+'&roast_profile='+coffeeraost_value;
+                          
+                        }else if(coffeetype_value=='' && coffeeraost_value!=''){
+                          location.href=base_url+'?roast_profile='+coffeeraost_value;
+                        }else{
+                          location.href=base_url;
+                        }
+                        
+                    });
+
+                    //jQuery( "#roast_profile_filter" ).change(function() {
+                      jQuery(document).on('change','#roast_profile_filter',function(){ 
+                          var coffeeraost_value = jQuery(this).val();
+                          var coffeetype_value = jQuery("#coffeetypefilter").val();
+                       // var coffeeraost_value = jQuery("#roast_profile_filter").val();
+                        //console.log(coffeeraost_value);
+                        // if (coffeeraost_value!='') {
+                        //    location.href=coffee_raost_url+'='+coffeeraost_value; 
+                        // }
+                        if (coffeeraost_value!='' && coffeetype_value=='' ) {
+                           location.href=base_url+'?roast_profile='+coffeeraost_value;
+                        }else if(coffeeraost_value!='' && coffeetype_value!=''){
+                          location.href=base_url+'?roast_profile='+coffeeraost_value+'&coffee_type='+coffeetype_value;
+                          
+                        }else if(coffeeraost_value=='' && coffeetype_value!=''){
+                          location.href=base_url+'?coffee_type='+coffeetype_value;
+                        }else{
+                          location.href=base_url;
+                        }
+                        
+                    });
+                })
+
+
+
+
+            })
+    </script>
+<?php endif;?>    
+
+<!-- for equipement brands -->
+
+<?php if(in_array($curr_id,$array_category_coffeeequipment)):?> 
+    <div class="filter-wrapper type">
+     <div class="type-sel">
+       <label for="staticEmail2" class="">Brand</label>
+       <select name="brand_filter" id="brand_filter">
+        <option value="">Select</option>
+        <?php
+
+            foreach ($array_brand as $pro_brand) {
+               if($get_value_params_brand ==$pro_brand['value']){
+                  $selected_brand='selected';
+               }else{
+                 $selected_brand='';
+               }
+                        
+        ?>
+                        
+        <option value="<?php echo $pro_brand['value'];?>" <?php echo  $selected_brand;?>><?php echo $pro_brand['label'];?></option>
+            
+        <?php
+          }
+            
+        ?>
+    
+       </select>
+     </div>
+    </div>
+    <script type="text/javascript">
+         require([
+              'jquery',
+              'jquery/ui'
+
+            ], function ($) 
+            {
+
+
+                jQuery(document).ready(function (e){
+                    var coffee_brand_url='';
+                     coffee_brand_url='<?php echo $url_cat_parent; ?>?<?php echo $coffee_brand_para; ?>';
+                     var base_url_equip='<?php echo $baseurl_cut; ?>';
+                   // jQuery( "#brand_filter" ).change(function() {
+                    jQuery(document).on('change','#brand_filter',function(){
+                        var coffeebrand_value = jQuery(this).val();
+                        // var coffeebrand_value = jQuery("#brand_filter").val();
+                        if (coffeebrand_value!='') {
+                           // location.href=coffee_brand_url+'='+coffeebrand_value; 
+                           location.href=base_url_equip+'?product_brand='+coffeebrand_value;
+                        }else{
+                          location.href=base_url_equip;
+                        }
+                        
+                    });
+
+                
+                })
+
+
+
+
+            })
+    </script>
+<?php endif;?>
+<script type="text/javascript">
+         require([
+              'jquery',
+              'jquery/ui'
+            ], function ($) 
+            {
+
+
+                jQuery(document).ready(function (e){
+                    var filter_div_top = jQuery(".inside-filter-wrapp").offset().top + 50;
+                        jQuery(window).scroll(function() {
+                          var scroll = jQuery(window).scrollTop();
+                          if (scroll >= filter_div_top) {
+                            jQuery('.inside-filter-wrapp').addClass('fixed');
+                          } else {
+                            jQuery('.inside-filter-wrapp').removeClass('fixed');
+                          }
+                        });
+
+                
+                })
+
+
+
+
+            })
+    </script>           

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Customerdata_Import::import" title="Order Export" module="Customerdata_Import" sortOrder="30" resource="Customerdata_Import::import"/>
+        <add id="Customerdata_Import::import_manage" title="Order Export" module="Customerdata_Import" sortOrder="10" parent="Customerdata_Import::import" action="import/import/index" resource="Customerdata_Import::import_manage"/>
+    </menu>
+</config>

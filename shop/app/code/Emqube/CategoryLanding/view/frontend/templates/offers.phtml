@@ -1,0 +1,74 @@
+<?php 
+$products = $block->OfferProducts(60);
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$priceHelper = $objectManager->create('Magento\Framework\Pricing\Helper\Data'); 
+?>
+<?php if (!empty($products)) :?>
+
+
+<?php endif;?>
+
+<div class="product-wrapper-main">
+
+
+ <div class="container d-flex">
+    <div class="page-title-wrapp">
+        <h1 class="page-title">Offers</h1>
+    </div>
+ </div>	
+
+ <div class="products wrapper grid products-grid">
+ 	<div class="container">
+ 		<ol class="products list items product-items d-flex">
+ 			<?php 
+            if(!empty($products) || $products!=''){
+            	$image='';
+              $savingPercent=0;
+              foreach ($products as $procat) {
+
+               $image=$block->ProductImage($procat->getID());
+                if($procat->getPrice()!=0){
+                  $savingPercent = 100 - round(($procat->getFinalPrice() / $procat->getPrice()*100));
+                }
+                
+                ?>
+
+                <li class="item product product-item">
+                  <?php if ($savingPercent > 0): ?>
+                     <div class="fast-moving">
+                        <span class="disc"><?php echo $savingPercent ?>% off</span>
+                    </div>
+                  <?php endif ?>
+                 
+                  <div class="product-item-info">
+                    <a href="<?php echo $procat->getProductUrl();?>" class="product photo product-item-photo" tabindex="-1">
+                      <span class="product-image-container" style="width:240px;">
+                        <span class="product-image-wrapper" style="padding-bottom: 125%;">
+                          <img src="<?php echo $image; ?>" alt="<?php echo $procat->getName(); ?>">
+                        </span>
+                      </span>
+                    </a>
+                    <div class="product details product-item-details">
+                      <strong class="product name product-item-name"><a class="product-item-link" href="<?php echo $procat->getProductUrl();?>"><?php echo $procat->getName();?></a></strong> 
+                      <strong><?php echo $priceHelper->currency($procat->getPrice(), true, false); ?></strong>
+                       <div class="product-item-inner">
+                        <div class="product actions product-item-actions">
+                          <div class="actions-primary">
+    	                      <a href="<?php echo $procat->getProductUrl();?>" class="action tocart primary">
+    	                         <span>Buy Now</span>
+                              </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+            <?php 
+              }
+            }
+           ?>
+ 		</ol>
+ 	</div>
+ </div>
+</div>

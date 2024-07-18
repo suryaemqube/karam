@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+   
+    <body>
+            <referenceBlock name="product_list_toolbar" remove="true" />
+            <referenceBlock name="require-cookie" remove="true"/>
+            <referenceBlock name="category.product.addto" remove="true"/>
+            <referenceBlock name="columns.top" remove="true"/>
+            <referenceBlock name="page.main.title" remove="true"/>
+          <referenceContainer name="main.content">
+              <container name="quick_buy.block_container" before="columns">
+                  <!-- must have content to display -->
+                  <block class="Emqube\ExpressOrder\Block\Form" name="quick_buy.block" template="Emqube_ExpressOrder::express_order_form.phtml" />
+              </container>
+          </referenceContainer>
+
+
+        
+         
+             
+             <move element="breadcrumbs" destination="custom_pro_wrapper" before="custom_filter_wrapper"/>
+              <move element="category.products.list" destination="custom_productcat_wrapper"/>
+             <referenceContainer name="columns">
+
+               <container name="custom_pro_wrapper" htmlTag="div" htmlClass="product-wrapper-main">
+
+
+                <container name="custom_filter_wrapper" htmlTag="div" htmlClass="filter-wrapper-done inside-filter-wrapp">
+                    <container name="custom_dflex_wrapper" htmlTag="div" htmlClass="container d-flex">
+                        
+                       <block class="Emqube\FiltersModule\Block\Category" name="title_block" template="Emqube_FiltersModule::title.phtml"/>  
+
+                       <container name="filter_inside_wrapper" htmlTag="div" htmlClass="filter-inside">
+                           
+                           <block class="Emqube\FiltersModule\Block\Category" name="cat_filter.block" template="Emqube_FiltersModule::category_filter.phtml"/>
+
+                            <block class="Emqube\FiltersModule\Block\Attribute" name="attr_filter.block" template="Emqube_FiltersModule::attribute_filter.phtml"/>
+                          
+                       </container>
+
+                       <container name="custom_filter_mobile_wrapper" htmlTag="div" htmlClass="filter-inside-responsive">
+
+                         <block class="Emqube\FiltersModule\Block\Category" name="browse_heading" template="Emqube_FiltersModule::components/browseheading.phtml"/>
+
+                          <container name="filter_open_wrapper" htmlTag="div" htmlClass="filter-open hide">
+                              <block class="Emqube\FiltersModule\Block\Category" name="browseinside_heading" template="Emqube_FiltersModule::components/insidebrowser.phtml"/>
+
+                              <block class="Emqube\FiltersModule\Block\Category" name="mobile_cat_filter_block" template="Emqube_FiltersModule::category_filter.phtml"/>
+
+                              <block class="Emqube\FiltersModule\Block\Attribute" name="mobile_attr_filter_block" template="Emqube_FiltersModule::attribute_filter.phtml"/>
+
+                          </container>
+
+
+                        </container>
+
+                    </container>
+
+                      
+                </container>
+
+
+               <block class="Magento\Framework\View\Element\Template" name="category_description" template="Emqube_FiltersModule::category_description.phtml" before="custom_productcat_wrapper"/>
+
+                <container name="custom_productcat_wrapper" htmlTag="div" htmlClass="products wrapper grid products-grid inside-prod-list">
+                       
+                  </container>
+                  
+               </container>
+
+            </referenceContainer>
+
+            <referenceContainer name="main.content">
+                
+                    <!-- <block class="Magento\Framework\View\Element\Template" name="subscription-section" template="Emqube_CategoryLanding::body/subscription_block.phtml" after="custom_pro_wrapper" /> -->
+
+                     <block class="Emqube\FiltersModule\Block\CategoriesDetails" name="middle_section" template="Emqube_FiltersModule::related_category_section.phtml" after="subscription-section" />
+
+                    <block class="Magento\Framework\View\Element\Template" name="friends-section" template="Emqube_CategoryLanding::body/friends_banner.phtml" after="middle_section" />
+
+                   
+
+                    <!-- <block class="Magento\Framework\View\Element\Template" name="blog-section" template="Emqube_CategoryLanding::body/blog_section.phtml" after="friends-section" /> -->
+
+                     <block class="Magento\Framework\View\Element\Template" name="pride-section" template="Emqube_CategoryLanding::body/pride_block.phtml" after="blog-section" />
+                    
+            
+            </referenceContainer>
+            <move element="middle_section" destination="main.content" after="friends-section"/>
+             
+            <referenceContainer name="page.bottom.container">
+              <block class="Magento\Catalog\Block\Product\View" name="custome_text_price" template="Emqube_CategoryLanding::price_notice.phtml"  after="content.aside"/>
+            </referenceContainer>  
+            <move element="custome_text_price" destination="custom_productcat_wrapper" after="-"/>
+
+    </body>
+</page>

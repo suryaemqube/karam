@@ -1,0 +1,50 @@
+div#shipping-new-address-form {
+    display: flex;
+    flex-direction: column;
+}
+div#shipping-new-address-form div:first-child {
+    order: 1;
+}
+div#shipping-new-address-form > div:nth-child(2) {
+    order: 2;
+}
+div#shipping-new-address-form > div:nth-child(3) {
+    order: 3;
+}
+div#shipping-new-address-form fieldset {
+    order: 4;
+}
+div#shipping-new-address-form > div:nth-child(5) {
+    order: 5;
+}
+div#shipping-new-address-form > div:nth-child(6) {
+    order: 6;
+}
+div#shipping-new-address-form > div:nth-child(7) {
+    order: 7;
+}
+div#shipping-new-address-form > div:nth-child(8) {
+    order: 9;
+}
+div#shipping-new-address-form > div:nth-child(9) {
+    order: 10;
+}
+div#shipping-new-address-form > div:nth-child(10) {
+    order: 11;
+}
+.field.w3w-checkout-field.input-field {
+    order: 8;
+}
+.payment-group {
+    display: flex;
+    flex-direction: column;
+}
+.payment-method {
+    order: 3;
+}
+div#payment-method-postpay {
+    order: 2;
+}
+.payment-method.stripe-payments {
+    order: 1;
+}

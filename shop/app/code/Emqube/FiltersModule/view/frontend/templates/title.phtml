@@ -1,0 +1,18 @@
+<?php 
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$currentCategory = $objectManager->get('Magento\Framework\Registry')->registry('current_category');
+$curr_id = $currentCategory->getID();
+$array_main_title=array(51,41);
+$title=$block->GetTitle($curr_id);
+if(in_array($curr_id, $array_main_title)){
+    $title=$block->GetTitle($curr_id);
+}else{
+    $title=$currentCategory->getName();
+}
+
+?>
+
+<div class="page-title-wrapp">
+    <h1 class="page-title"><?php echo $title; ?></h1>
+</div>

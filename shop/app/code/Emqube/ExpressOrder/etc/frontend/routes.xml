@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright © 2016 Magento. All rights reserved. * See COPYING.txt for license details.
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="variation" frontName="variation">
+            <module name="Emqube_ExpressOrder" />
+        </route>
+
+        <route id="prices" frontName="prices">
+            <module name="Emqube_ExpressOrder" />
+        </route>
+
+        <route id="addcart" frontName="addcart">
+            <module name="Emqube_ExpressOrder" />
+        </route>
+
+        <route id="cartitems" frontName="cartitems">
+            <module name="Emqube_ExpressOrder" />
+        </route>
+
+         <route id="coffeetype" frontName="coffeetype">
+            <module name="Emqube_ExpressOrder" />
+        </route>
+        
+        <route id="roaster" frontName="roaster">
+            <module name="Emqube_ExpressOrder" />
+        </route>
+
+        <route id="coffeeweight" frontName="coffeeweight">
+            <module name="Emqube_ExpressOrder" />
+        </route>
+
+        <route id="coffeenos" frontName="coffeenos">
+            <module name="Emqube_ExpressOrder" />
+        </route>
+
+         <route id="coffeevariants" frontName="coffeevariants">
+            <module name="Emqube_ExpressOrder" />
+        </route>
+
+        <route id="coffeerange" frontName="coffeerange">
+            <module name="Emqube_ExpressOrder" />
+        </route>
+        
+    </router>
+
+    
+</config>

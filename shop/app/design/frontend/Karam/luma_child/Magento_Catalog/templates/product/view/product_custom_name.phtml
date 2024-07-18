@@ -1,0 +1,18 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$currentProduct = $objectManager->get('Magento\Framework\Registry')->registry('current_product');//get current product information
+$id= $currentProduct->getId();
+$product_brand='null';
+if($id!=''){
+    $product = $objectManager->create('Magento\Catalog\Model\Product')->load($id);
+    $product_brand = $product->getResource()->getAttribute('product_brand')->getFrontend()->getValue($product);
+    // $product_brand = $product->getData('product_brand');
+}
+
+$name = $currentProduct->getName();
+
+?>
+<p class="brand-name"><?php echo $product_brand; ?></p>
+<h1 class="page-title">
+    <span class="base" data-ui-id="page-title-wrapper" itemprop="name"><?php echo $name;?></span>
+</h1>

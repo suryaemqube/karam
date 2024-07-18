@@ -1,0 +1,76 @@
+<?php
+
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+?>
+<?php $_product = $block->getProduct(); ?>
+<?php
+$subscribe_link = $_product->getData('subscription_product_link');
+$subscription = $_product->getData('subscription');
+$helper = $this->helper('Meetanshi\SubscriptionRestriction\Helper\Data');
+$customerLogin = $helper->getCustomerLogin();
+$redirectPage = $helper->getRedirectPage();
+?>
+
+<?php $buttonTitle = __('Add to Cart'); ?>
+<?php if ($_product->isSaleable()) { ?>
+    <?php if ($block->shouldRenderQuantity()) { ?>
+        <div class="field qty">
+            <label class="label" for="qty"><span><?= $block->escapeHtml(__('Qty')) ?></span></label>
+            <div class="control">
+                <input type="number" name="qty" id="qty" min="0" value="<?= $block->getProductDefaultQty() * 1 ?>" title="<?= $block->escapeHtmlAttr(__('Qty')) ?>" class="input-text qty" data-validate="<?= $block->escapeHtmlAttr(json_encode($block->getQuantityValidators())) ?>" />
+            </div>
+        </div>
+    <?php } ?>
+
+    <!-- added by surya to display message for sub products only starts -->
+    <?php $subAttr = $_product->getData('subscription'); ?>
+    <?php if ($subAttr) { ?>
+        <p class="small-txt subscription-note su"><span>Minimum of 10 packets are required to start a Karam Coffee Subscription. </span><span>Enjoy a discount with Monthly Subscription.</span></p>
+    <?php } ?>
+    <!-- added by surya to display message for sub products only ends -->
+
+    <div class="box-tocart <?php if ($subscribe_link != '') { ?> other-subscribe-btn <?php } ?>">
+        <div class="fieldset">
+            <div class="actions">
+                <?php if (!$subscription) { ?>
+                    <button type="submit" title="<?= $block->escapeHtmlAttr($buttonTitle) ?>" class="action primary tocart karam-1" id="product-addtocart-button" disabled>
+                        <span><?= $block->escapeHtml($buttonTitle) ?></span>
+                    </button>
+                    <?php } else {
+                    if ($customerLogin) { ?>
+                        <button type="submit" title="<?= $block->escapeHtmlAttr($buttonTitle) ?>" class="action primary tocart karam-2" id="product-addtocart-button" disabled>
+                            <span><?= $block->escapeHtml($buttonTitle) ?></span>
+                        </button>
+                    <?php } else { ?>
+                        <a href="<?php echo $redirectPage; ?>" class="action toSubscribe karam-3"><?php echo __('Please login to subscribe to this product') ?></a>
+                <?php } // closing else for $customerLogin
+                } // closing else for $subscription 
+                ?>
+
+                <?php if ($subscribe_link != '') { ?>
+                    <a href="<?php echo $subscribe_link; ?>" class="action toSubscribe" style="display: none;">Subscribe</a>
+                <?php } ?>
+                <?= $block->getChildHtml('', true) ?>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+
+<?php if (!$_product->isSaleable()) { ?>
+    <div class="box-tocart">
+        <h1>Out of Stock</h1>
+    </div>
+<?php } ?>
+
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/js/validate-product": {}
+        }
+    }
+</script>

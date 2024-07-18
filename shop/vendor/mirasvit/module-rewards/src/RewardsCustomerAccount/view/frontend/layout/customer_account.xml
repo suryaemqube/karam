@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="customer_account_navigation">
+            <block class="Magento\Customer\Block\Account\SortLinkInterface"
+                   name="customer-account-navigation-rewards-link"
+                   ifconfig="rewards/display_options/is_show_points_menu">
+                <arguments>
+                    <argument name="path" xsi:type="string">rewards/account</argument>
+                    <argument name="label" xsi:type="string">My Reward Points</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceContainer name="columns">
+            <block class="Mirasvit\RewardsCustomerAccount\Block\Account\ExpiringPoints"
+                   name="customer-account-rewards-notification" before="-"
+                   template="account/expiring_points.phtml"
+                   ifconfig="rewards/display_options/is_show_expiration_points_amount"
+            />
+        </referenceContainer>
+    </body>
+</page>

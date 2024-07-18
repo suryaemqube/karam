@@ -1,0 +1,23 @@
+<?php
+/** @var \Mirasvit\RewardsCustomerAccount\Block\Widget\Referral $block */
+
+$collection     = $block->getReferralCollection();
+$addToAnyScript = $block->getAddToAnyScript();
+?>
+<div class="mst__referral-widget">
+    <strong><?= __('Share your referral link with your friends and get reward for their purchases') ?></strong>
+
+    <div class="mst__referral-widget-items">
+        <div>
+            <div class="addtoany a2a_kit a2a_kit_size_32 a2a_default_style"></div>
+            <?= $addToAnyScript ?>
+        </div>
+
+        <?php if ($block->isCustomerLoggedIn()): ?>
+            <span><?= $block->getShareUrl() ?></span>
+        <?php else: ?>
+            <span><span><?= __('Register to get rewards') ?></span></span>
+        <?php endif; ?>
+    </div>
+</div>
+

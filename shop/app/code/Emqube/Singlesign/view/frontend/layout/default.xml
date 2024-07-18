@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+  <body>
+      <referenceBlock name="top.links">
+          <block class="Magento\Customer\Block\Account\SortLink" name="order-history-top-link" after="wish-list-link">
+              <arguments>
+                  <argument name="path" xsi:type="string">https://karamcoffee.ae/listing-posts/</argument>
+                  <argument name="label" xsi:type="string" translate="true">My Blogs</argument>
+              </arguments>
+          </block>
+      </referenceBlock>
+
+      <referenceContainer name="after.body.start">
+         <block class="Emqube\Singlesign\Block\Customerdata" name="head.components" as="components" template="Emqube_Singlesign::allsession.phtml"/>
+      </referenceContainer>
+
+  </body>
+</page>

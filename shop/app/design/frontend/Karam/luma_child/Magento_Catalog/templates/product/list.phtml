@@ -1,0 +1,211 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+use Magento\Framework\App\Action\Action;
+
+?>
+<?php
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+
+/**
+ * Product list template
+ *
+ * @var $block \Magento\Catalog\Block\Product\ListProduct
+ */
+?>
+<?php
+$_productCollection = $block->getLoadedProductCollection();
+$_productCollection->clear()->addAttributeToSort('price', 'DESC');
+$_helper = $this->helper(Magento\Catalog\Helper\Output::class);
+?>
+<?php if (!$_productCollection->count()) :?>
+    <div class="message info empty"><div><?= $block->escapeHtml(__('We can\'t find products matching the selection.')) ?></div></div>
+<?php else :?>
+    <?= $block->getToolbarHtml() ?>
+    <?= $block->getAdditionalHtml() ?>
+    <?php
+    if ($block->getMode() == 'grid') {
+        $viewMode = 'grid';
+        $imageDisplayArea = 'category_page_grid';
+        $showDescription = false;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+    } else {
+        $viewMode = 'list';
+        $imageDisplayArea = 'category_page_list';
+        $showDescription = true;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::FULL_VIEW;
+    }
+    /**
+     * Position for actions regarding image size changing in vde if needed
+     */
+    $pos = $block->getPositioned();
+    ?>
+    <?php 
+     $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+     $category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');//get current category
+     $parent_cat_name = $category->getParentCategory()->getName();
+     ?>
+    <div class="products wrapper <?= /* @noEscape */ $viewMode ?> products-<?= /* @noEscape */ $viewMode ?>">
+        <div class="container">
+            <ol class="products list items product-items ok" curr-cat="<?php echo $category->getName(); ?>" parent-cat="<?php echo $parent_cat_name; ?>">
+            <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
+            <?php 
+            $_productArray = $_productCollection->getItems();
+            $_productArray = array_reverse($_productArray);
+            ?>
+            <?php foreach ($_productArray as $_product) :?>
+            <li class="item product product-item">
+                <?php 
+                $attribute_custome =array();
+                $attributeValue ='';
+                $attribute_custome = $_product->getResource()->getAttribute('fast_moving');
+                if (!empty($attribute_custome)) {
+                    $attributeValue = $attribute_custome->getFrontend()->getValue($_product);   
+                }
+                
+                ?>
+                <?php if($attributeValue=='Yes'): ?>
+                    <div class="fast-moving">
+                      <span class="fast">Fast <br>Moving</span>
+                    </div>
+                <?php endif; ?>
+                <div class="product-item-info" data-container="product-<?= /* @noEscape */ $viewMode ?>">
+                    <?php
+                    $productImage = $block->getImage($_product, $imageDisplayArea);
+                    if ($pos != null) {
+                        $position = ' style="left:' . $productImage->getWidth() . 'px;'
+                            . 'top:' . $productImage->getHeight() . 'px;"';
+                    }
+                    ?>
+                    <?php // Product Image ?>
+                    <a href="<?= $block->escapeUrl($_product->getProductUrl()) ?>"
+                       class="product photo product-item-photo"
+                       tabindex="-1">
+                        <?= $productImage->toHtml() ?>
+                    </a>
+                    <div class="product details product-item-details">
+                        <?php
+                            $_productNameStripped = $block->stripTags($_product->getName(), null, true);
+                        ?>
+                        <strong class="product name product-item-name">
+                            <a class="product-item-link"
+                               href="<?= $block->escapeUrl($_product->getProductUrl()) ?>">
+                                <?= /* @noEscape */ $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+                            </a>
+                        </strong>
+                        <?php 
+                      
+                        if ($_product->getTypeId()=='configurable') {
+                            $attr_weight=array();
+                            $configProduct = $objectManager->create('Magento\Catalog\Model\Product')->load($_product->getID());
+                                
+                            $_children = $configProduct->getTypeInstance()->getUsedProducts($configProduct);
+                            foreach ($_children as $child){
+                            
+                                $attr_gram = $_product->getResource()->getAttribute('coffee_weight');
+                                if ($attr_gram->usesSource()) {
+                                    $optionText = $attr_gram->getSource()->getOptionText($child->getCoffeeWeight());
+                                }
+                                if ($optionText!='') {
+                                    array_push($attr_weight, $optionText);
+                                }
+                                
+                            }
+                            
+                        }
+
+                         ?>
+                         <div class="weight-unit">
+                             <?php 
+                               if (!empty($attr_weight)) {
+                                $string_version ='';
+                                   if (count($attr_weight) > 1) {
+                                        $string_version = implode(' | ', $attr_weight);
+                                        echo $string_version;
+                                   }else{
+                                    echo $attr_weight[0];
+                                   }
+                               }
+                              ?>
+                         </div>
+                        <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
+                        <?= /* @noEscape */ $block->getProductPrice($_product) ?>
+                        <?php if ($_product->isAvailable()) :?>
+                            <?= $block->getProductDetailsHtml($_product) ?>
+                        <?php endif; ?>
+
+                        <div class="product-item-inner">
+                            <div class="product actions product-item-actions"<?= $pos && strpos($pos, $viewMode . '-actions') ? $block->escapeHtmlAttr($position) : '' ?>>
+                                <div class="actions-primary"<?= $pos && strpos($pos, $viewMode . '-primary') ? $block->escapeHtmlAttr($position) : '' ?>>
+                                    <?php if ($_product->isSaleable()) :?>
+                                        <?php $postParams = $block->getAddToCartPostParams($_product); ?>
+                                        <form data-role="tocart-form"
+                                              data-product-sku="<?= $block->escapeHtmlAttr($_product->getSku()) ?>"
+                                              action="<?= $block->escapeUrl($postParams['action']) ?>"
+                                              method="post">
+                                            <input type="hidden"
+                                                   name="product"
+                                                   value="<?= /* @noEscape */ $postParams['data']['product'] ?>">
+                                            <input type="hidden" name="<?= /* @noEscape */ Action::PARAM_NAME_URL_ENCODED ?>"
+                                                   value="<?= /* @noEscape */ $postParams['data'][Action::PARAM_NAME_URL_ENCODED] ?>">
+                                            <?= $block->getBlockHtml('formkey') ?>
+
+
+                                            <?php 
+                                               $class_color='';
+                                               $category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');//get current category
+                                            
+                                               $class_color = str_replace(" ","-",strtolower($category->getName()));
+                                             ?>
+                                            <a href="<?= $block->escapeUrl($_product->getProductUrl()) ?>" class="action tocart primary <?php echo $class_color; ?>">
+                                                
+                                                <span>Buy Now</span>
+                                            </a>
+                                            
+                                        </form>
+                                    <?php else :?>
+                                        <?php if ($_product->isAvailable()) :?>
+                                            <div class="stock available"><span><?= $block->escapeHtml(__('In stock')) ?></span></div>
+                                        <?php else :?>
+                                            <div class="stock unavailable"><span><?= $block->escapeHtml(__('Out of stock')) ?></span></div>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                </div>
+                                <div data-role="add-to-links" class="actions-secondary"<?= $pos && strpos($pos, $viewMode . '-secondary') ? $block->escapeHtmlAttr($position) : '' ?>>
+                                    <?php if ($addToBlock = $block->getChildBlock('addto')) :?>
+                                        <?= $addToBlock->setProduct($_product)->getChildHtml() ?>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            <?php if ($showDescription) :?>
+                                <div class="product description product-item-description">
+                                    <?= /* @noEscape */ $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
+                                    <a href="<?= $block->escapeUrl($_product->getProductUrl()) ?>"
+                                       title="<?= /* @noEscape */ $_productNameStripped ?>"
+                                       class="action more"><?= $block->escapeHtml(__('Learn More')) ?></a>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <?php endforeach; ?>
+        </ol>
+        </div>
+        
+    </div>
+    <?= $block->getToolbarHtml() ?>
+    <?php if (!$block->isRedirectToCartEnabled()) :?>
+        <script type="text/x-magento-init">
+        {
+            "[data-role=tocart-form], .form.map.checkout": {
+                "catalogAddToCart": {
+                    "product_sku": "<?= $block->escapeJs($_product->getSku()) ?>"
+                }
+            }
+        }
+        </script>
+    <?php endif; ?>
+<?php endif; ?>

@@ -1,0 +1,38 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$currentProduct = $objectManager->get('Magento\Framework\Registry')->registry('current_product');
+//get current product information
+$categories=array();
+$categories = $currentProduct->getCategoryIds();
+$id= $currentProduct->getId();
+$arabic_description='asdasdasd';
+$coffee_desc_class='';
+$check_array_cat=array();
+if(!empty($categories)){
+  foreach($categories as $category){
+    $cat = $objectManager->create('Magento\Catalog\Model\Category')->load($category);
+    $cat->getID();
+    array_push($check_array_cat,$cat->getID());
+  }
+}
+if(!empty($check_array_cat)){
+  // if(in_array("41", $check_array_cat)){
+  //   $coffee_desc_class='coffee-description';
+  // }
+  if(in_array("51", $check_array_cat)){
+    $coffee_desc_class = 'coffee-equip-ar-description';
+  }
+}
+
+if($id!=''){
+    $product = $objectManager->create('Magento\Catalog\Model\Product')->load($id);
+    $arabic_description = $product->getData('arabic_description');
+
+}
+
+?>
+
+<div class="content <?php echo $coffee_desc_class; ?>">
+  <!-- <span class="title">Arabic Content : </span> -->
+  <p><?php echo $arabic_description; ?> </p>
+</div>

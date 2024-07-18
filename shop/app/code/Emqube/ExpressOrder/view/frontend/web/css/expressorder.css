@@ -1,0 +1,30 @@
+.express-order-wrapper {
+    border: 2px solid;
+    height: auto;
+    color: black;
+    padding: 26px;
+    margin-bottom: 8px;
+}
+
+.actions-button {
+    padding-top: 14px;
+    padding-left: 5px;
+}
+
+.label-express {
+    padding-top: 23px;
+    padding: 13px;
+    font-size: 19px;
+    font-style: italic;
+}
+button.add-button {
+    width: 86px;
+    font-size: 11px;
+}
+a.checkout-link {
+    font-size: 16px;
+    padding: 10px;
+}
+span.price-show {
+    font-size: 16px;
+}
